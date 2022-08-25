@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Pelicula" )         // Nombre de la tabla//
+@Table(name = "Pelicula" )
 @Getter
 @Setter
 
@@ -30,21 +30,22 @@ public class PeliculasEntity {
 
     private Long Calificacion;
 
-            //inicializacion temprana//
-            //Si pido una pelicula me va a venir con su genero y demas//
-            // Con cascade all aplico los cambios a los demas atributos//
+        //inicializacion temprana//
+        //Si pido una pelicula me va a venir con su genero//
+        // Con cascade all aplico los cambios a los demas atributos//
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 
 
-    // Se usa false por que SOLO LO USO PARA PEDIR INFO //
+         // Se usa false por que SOLO LO USO PARA PEDIR INFO //
     @JoinColumn(name = "genero_id", insertable = false, updatable = false )
     private GeneroEntity genero;
 
-          //Con esta columna cuando quiero crear una pelicula le paso un id de genero y se crea en ese lugar//
-          //guardo y actualizo//
+        //Con esta columna cuando quiero crear una pelicula le paso un id de genero y se crea en ese lugar//
+        //guardo y actualizo//
     @Column(name= "genero_id", nullable = false)
     private Long generoId;
 
+        // Cuando creo una pelicula puedo agregar varios personajes, pelicula engloba  a personajes//
     @ManyToMany(
             cascade = {
         CascadeType.PERSIST,

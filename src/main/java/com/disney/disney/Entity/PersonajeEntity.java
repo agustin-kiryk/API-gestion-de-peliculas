@@ -22,6 +22,7 @@ public class PersonajeEntity {
     private Long peso;
     private String historia;
 
+// Creo personajes solamente sin asignar peliculas ni genero
     @ManyToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
     private List<PeliculasEntity> peliculas= new ArrayList<>();
 
