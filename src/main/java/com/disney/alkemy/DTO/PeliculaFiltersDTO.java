@@ -8,7 +8,8 @@ import lombok.Setter;
 @Setter
 public class PeliculaFiltersDTO {
     private String titulo;
-    private String genero;
+    private Long generoId;
+    private String fechaCreacion;
     private String order;
 
     public boolean isAsc() {

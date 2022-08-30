@@ -13,6 +13,8 @@ public interface PeliculaService {
 
     List<PeliculaDTO> getByFilters(String titulo, Long genero, String order);
 
+    List<PeliculaDTO> getByFilters(String titulo, Long genero, String fechaCreacion, String order);
+
     PeliculaDTO update(Long id, PeliculaDTO pelicula);
 
     PeliculaDTO save(PeliculaDTO pelicula);
