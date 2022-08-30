@@ -1,8 +1,7 @@
-package com.disney.disney.Controller;
+package com.disney.alkemy.Controller;
 
-import com.disney.disney.DTO.GeneroDTO;
-import com.disney.disney.Service.GeneroService;
-import com.disney.disney.Service.impl.GeneroServiceImpl;
+import com.disney.alkemy.DTO.GeneroDTO;
+import com.disney.alkemy.Service.GeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +22,20 @@ public class GeneroController {
 
     //Traer Generos//
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<GeneroDTO>> getAll(){
         List<GeneroDTO> generos = generoService.getAllgeneros();
         return ResponseEntity.ok().body(generos);
 
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GeneroDTO> getDetailsById (@PathVariable Long id) {
+        GeneroDTO genero = generoService.getDetailsById(id);
+        return ResponseEntity.ok(genero);
+    }
+
+
     /*guardar genero*/
     @PostMapping
     public ResponseEntity<GeneroDTO> save(@RequestBody GeneroDTO genero){
@@ -41,6 +48,15 @@ public class GeneroController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.generoService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    //Actualizar Generos//
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GeneroDTO> update(@PathVariable Long id, @RequestBody GeneroDTO genero){
+        GeneroDTO result = generoService.update(id,genero);
+        return ResponseEntity.ok(result);
+
     }
 
 

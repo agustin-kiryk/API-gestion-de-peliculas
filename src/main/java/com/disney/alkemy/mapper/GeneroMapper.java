@@ -1,8 +1,7 @@
-package com.disney.disney.mapper;
+package com.disney.alkemy.mapper;
 
-import com.disney.disney.DTO.GeneroDTO;
-import com.disney.disney.Entity.GeneroEntity;
-import lombok.extern.apachecommons.CommonsLog;
+import com.disney.alkemy.DTO.GeneroDTO;
+import com.disney.alkemy.Entity.GeneroEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

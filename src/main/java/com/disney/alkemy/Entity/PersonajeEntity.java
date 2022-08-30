@@ -1,4 +1,4 @@
-package com.disney.disney.Entity;
+package com.disney.alkemy.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,8 +23,8 @@ public class PersonajeEntity {
     private String historia;
 
 // Creo personajes solamente sin asignar peliculas ni genero
-    @ManyToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
-    private List<PeliculasEntity> peliculas= new ArrayList<>();
+    @ManyToMany(mappedBy = "personajes", cascade = CascadeType.PERSIST)
+    private List<PeliculaEntity> peliculas = new ArrayList<>();
 
 
 

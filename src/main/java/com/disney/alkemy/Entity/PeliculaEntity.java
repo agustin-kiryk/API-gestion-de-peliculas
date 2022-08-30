@@ -1,4 +1,4 @@
-package com.disney.disney.Entity;
+package com.disney.alkemy.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 
-public class PeliculasEntity {
+public class PeliculaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
 
@@ -26,17 +26,12 @@ public class PeliculasEntity {
 
     @Column(name = "fecha_creacion")
     @DateTimeFormat(pattern = "yyy/mm/dd")
-    private LocalDate FechaCreacion;
+    private String FechaCreacion;
 
     private Long Calificacion;
 
-        //inicializacion temprana//
-        //Si pido una pelicula me va a venir con su genero//
-        // Con cascade all aplico los cambios a los demas atributos//
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 
-
-         // Se usa false por que SOLO LO USO PARA PEDIR INFO //
     @JoinColumn(name = "genero_id", insertable = false, updatable = false )
     private GeneroEntity genero;
 
@@ -56,7 +51,7 @@ public class PeliculasEntity {
             joinColumns = @JoinColumn(name= "pelicula_id"),
             inverseJoinColumns = @JoinColumn(name="personaje_id")
     )
-    private Set<PersonajeEntity> personaje = new HashSet<>();
+    private Set<PersonajeEntity> personajes = new HashSet<>();
 
 
 

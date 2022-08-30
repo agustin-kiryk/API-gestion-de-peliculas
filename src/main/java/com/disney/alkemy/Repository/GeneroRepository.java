@@ -1,6 +1,6 @@
-package com.disney.disney.Repository;
+package com.disney.alkemy.Repository;
 
-import com.disney.disney.Entity.GeneroEntity;
+import com.disney.alkemy.Entity.GeneroEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
