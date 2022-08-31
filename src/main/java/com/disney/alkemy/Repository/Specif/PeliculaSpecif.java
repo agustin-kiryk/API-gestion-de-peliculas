@@ -9,5 +9,6 @@ public class PeliculaSpecif {
     public Specification <PeliculaEntity> getByFilters(PeliculaFiltersDTO filtersDTO) {
 
 
+        return null;
     }
 }

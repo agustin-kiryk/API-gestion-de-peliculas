@@ -54,11 +54,12 @@ public class PeliculaEntity {
     private Set<PersonajeEntity> personajes = new HashSet<>();
 
 
+    public void addPersonaje(PersonajeEntity personaje) {
+        this.personajes.add(personaje);
+    }
 
-
-
-
-
-
+    public void removePersonaje(PersonajeEntity personaje) {
+        this.personajes.remove(personaje);
+    }
 
 }

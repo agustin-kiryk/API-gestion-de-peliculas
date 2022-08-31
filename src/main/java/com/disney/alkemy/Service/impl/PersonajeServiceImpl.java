@@ -19,7 +19,7 @@ public class PersonajeServiceImpl implements PersonajeService {
     private PersonajeRepository personajeRepository;
 
     @Override
-    public PersonajeDTO save(PersonajeDTO dto) {
+     public PersonajeDTO save(PersonajeDTO dto) {
         PersonajeEntity entity = personajeMapper.personajedto2Entity(dto);
         PersonajeEntity entitysaved = personajeRepository.save(entity);
         PersonajeDTO result = personajeMapper.personajeEntity2DTO(entitysaved);
@@ -32,6 +32,11 @@ public class PersonajeServiceImpl implements PersonajeService {
         List<PersonajeEntity> entities = personajeRepository.findAll();
         List<PersonajeDTO> result = personajeMapper.personajeEntityList2DTOList(entities);
         return result;
+    }
+
+    @Override
+    public PersonajeEntity getEntityById(Long idPersonaje) {
+        return null;
     }
 
     @Override

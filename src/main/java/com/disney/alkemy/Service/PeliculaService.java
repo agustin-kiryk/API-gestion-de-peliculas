@@ -11,9 +11,8 @@ public interface PeliculaService {
 
     PeliculaDTO getDetailsById(Long id);
 
-    List<PeliculaDTO> getByFilters(String titulo, Long genero, String order);
 
-    List<PeliculaDTO> getByFilters(String titulo, Long genero, String fechaCreacion, String order);
+    List<PeliculaDTO> getByFilters(String titulo, Long genero, String fechaCreacion);
 
     PeliculaDTO update(Long id, PeliculaDTO pelicula);
 
