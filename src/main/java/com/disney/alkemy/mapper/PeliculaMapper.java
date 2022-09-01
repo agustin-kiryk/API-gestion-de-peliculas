@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,11 +23,15 @@ private PersonajeMapper personajeMapper;
 
         this.personajeMapper = personajeMapper;
     }
-
+    private LocalDate stringToLocalDate(String stringDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(stringDate, formatter);
+        return date;
+    }
     public void peliculaEntityRefreshValues(PeliculaEntity entity, PeliculaDTO dto) {
         entity.setImagen(dto.getImagen());
         entity.setTitulo(dto.getTitulo());
-        entity.setFechaCreacion(dto.getFechaCreacion());
+        entity.setFechaCreacion(this.stringToLocalDate(dto.getFechaCreacion()));
         entity.setCalificacion(dto.getCalificacion());
         entity.setGeneroId(dto.getGeneroId());
     }
@@ -34,7 +40,7 @@ private PersonajeMapper personajeMapper;
         PeliculaEntity peliculaEntity = new PeliculaEntity();
         peliculaEntity.setImagen(dto.getImagen());
         peliculaEntity.setTitulo(dto.getTitulo());
-        peliculaEntity.setFechaCreacion(dto.getFechaCreacion());
+        peliculaEntity.setFechaCreacion(this.stringToLocalDate(dto.getFechaCreacion()));
         peliculaEntity.setCalificacion(dto.getCalificacion());
         peliculaEntity.setGeneroId(dto.getGeneroId());
         return peliculaEntity;
@@ -45,7 +51,7 @@ private PersonajeMapper personajeMapper;
         dto.setId(entity.getId());
         dto.setImagen(entity.getImagen());
         dto.setTitulo(entity.getTitulo());
-        dto.setFechaCreacion(entity.getFechaCreacion());
+        dto.setFechaCreacion(entity.getFechaCreacion().toString());
         dto.setCalificacion(entity.getCalificacion());
         dto.setGeneroId(entity.getGeneroId());
         if(loadPersonajes) {

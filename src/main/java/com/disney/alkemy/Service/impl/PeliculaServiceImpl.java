@@ -65,7 +65,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
 
     @Override
-    public List<PeliculaDTO> getByFilters(String titulo, Long genero, String order) {
+    public List<PeliculaDTO> getDetailsByFilters(String titulo, Long genero, String order) {
         PeliculaFiltersDTO filtersDTO = new PeliculaFiltersDTO(titulo, genero, order);
         List<PeliculaEntity> entities = this.peliculaRepository.findAll(this.peliculaSpecif.getByFilters(filtersDTO));
         List<PeliculaDTO> dtos = this.peliculaMapper.peliculaEntitySet2DTOList(entities, true);

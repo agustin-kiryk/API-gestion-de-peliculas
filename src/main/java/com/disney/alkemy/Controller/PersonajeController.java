@@ -1,6 +1,7 @@
 package com.disney.alkemy.Controller;
 
 
+import com.disney.alkemy.DTO.PersonajeAuxDTO;
 import com.disney.alkemy.DTO.PersonajeDTO;
 import com.disney.alkemy.Service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("personajes")
@@ -19,16 +21,30 @@ public class PersonajeController {
 
     @PostMapping
     public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje){
-        PersonajeDTO personajeGuardado = personajeService.save(personaje);
-        return ResponseEntity.status(HttpStatus.CREATED).body(personajeGuardado);
+        PersonajeDTO personajeSaved = personajeService.save(personaje);
+        return ResponseEntity.status(HttpStatus.CREATED).body(personajeSaved);
     }
-    @GetMapping
-    public ResponseEntity<List<PersonajeDTO>> getAll(){
-        List<PersonajeDTO> personajes = personajeService.getAllpersonajes();
+    @GetMapping("/all")
+    public ResponseEntity<List<PersonajeAuxDTO>> getAll(){
+        List<PersonajeAuxDTO> personajes = personajeService.getAllpersonajes();
         return ResponseEntity.ok().body(personajes);
-
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> getDetailsById(@PathVariable Long id) {
+        PersonajeDTO personaje = this.personajeService.getDetailsById(id);
+        return ResponseEntity.ok(personaje);
+    }
+    @GetMapping ResponseEntity<List<PersonajeDTO>> getByFilters(
+            @RequestParam (required = false) String nombre,
+            @RequestParam(required = false) Long edad,
+            @RequestParam(required = false) Long peso,
+            @RequestParam(required = false) Set<Long> peliculas
+    ){
+        List<PersonajeDTO> personajes = this.personajeService.getByFilters(nombre, edad, peso, peliculas);
+        return ResponseEntity.ok(personajes);
     }
     //Borrar generos//
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         this.personajeService.delete(id);

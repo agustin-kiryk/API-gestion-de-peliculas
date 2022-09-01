@@ -1,20 +1,15 @@
 package com.disney.alkemy.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 @Getter
 @Setter
-public class PersonajeDTO {
-
+@NoArgsConstructor
+public class PersonajeAuxDTO {
     private Long id;
     private String imagen;
     private String nombre;
-    private Long edad;
-    private Long peso;
-    private String historia;
-    private List<PeliculaDTO> peliculas;
-
-
 }

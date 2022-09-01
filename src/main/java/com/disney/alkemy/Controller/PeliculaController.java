@@ -38,7 +38,7 @@ public class PeliculaController {
              @RequestParam(required = false) Long genero,
              @RequestParam(required = false, defaultValue = "ASC") String order
     ) {
-        List<PeliculaDTO> peliculas = this.peliculaService.getByFilters(titulo, genero, order);
+        List<PeliculaDTO> peliculas = this.peliculaService.getDetailsByFilters(titulo, genero, order);
         return ResponseEntity.ok(peliculas);
     }
 

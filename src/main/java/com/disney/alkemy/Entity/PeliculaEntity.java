@@ -26,7 +26,7 @@ public class PeliculaEntity {
 
     @Column(name = "fecha_creacion")
     @DateTimeFormat(pattern = "yyy/mm/dd")
-    private String FechaCreacion;
+    private LocalDate FechaCreacion;
 
     private Long Calificacion;
 
