@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface PersonajeRepository extends JpaRepository<PersonajeEntity, Long> {
-    List<PersonajeEntity> findAll(Specification<PersonajeEntity> detailsByFilters);
+    List<PersonajeEntity> findAll(Specification<PersonajeEntity> spec);
 }

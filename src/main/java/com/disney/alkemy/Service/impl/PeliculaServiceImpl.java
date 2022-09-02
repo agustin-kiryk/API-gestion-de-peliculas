@@ -1,5 +1,6 @@
 package com.disney.alkemy.Service.impl;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.disney.alkemy.DTO.PeliculaAuxDTO;
 import com.disney.alkemy.DTO.PeliculaDTO;
 import com.disney.alkemy.DTO.PeliculaFiltersDTO;
@@ -11,8 +12,7 @@ import com.disney.alkemy.Service.PeliculaService;
 import com.disney.alkemy.Service.PersonajeService;
 import com.disney.alkemy.exceptions.ParamNotFound;
 import com.disney.alkemy.mapper.PeliculaMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 public class PeliculaServiceImpl implements PeliculaService {
 
-    @Autowired
+
     private PeliculaRepository peliculaRepository;
 
     private PeliculaSpecif peliculaSpecif;

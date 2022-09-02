@@ -6,6 +6,7 @@ import com.disney.alkemy.Entity.PeliculaEntity;
 import com.disney.alkemy.Entity.PersonajeEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class PersonajeSpecif {
     public Specification<PersonajeEntity> getByFilters(PersonajeFiltersDTO filtersDTO) {
         return (root, query, criteriaBuilder) -> {

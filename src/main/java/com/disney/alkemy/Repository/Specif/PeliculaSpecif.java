@@ -4,13 +4,14 @@ import com.disney.alkemy.DTO.PeliculaAuxDTO;
 import com.disney.alkemy.DTO.PeliculaFiltersDTO;
 import com.disney.alkemy.Entity.PeliculaEntity;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+@Component
 public class PeliculaSpecif {
     public Specification <PeliculaEntity> getByFilters(PeliculaFiltersDTO filtersDTO) {
         return (root, query, criteriaBuilder) -> {
