@@ -28,7 +28,7 @@ public class PersonajeSpecif {
             if (StringUtils.hasLength(filtersDTO.getNombre())) {
                 predicates.add(
                         criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("title")),
+                                criteriaBuilder.lower(root.get("nombre")),
                                 "%" + filtersDTO.getNombre().toLowerCase() + "%"
                         )
                 );

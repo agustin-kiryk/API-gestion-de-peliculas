@@ -3,12 +3,13 @@ package com.disney.alkemy.mapper;
 import com.disney.alkemy.DTO.PeliculaDTO;
 import com.disney.alkemy.DTO.PersonajeAuxDTO;
 import com.disney.alkemy.DTO.PersonajeDTO;
+import com.disney.alkemy.Entity.PeliculaEntity;
 import com.disney.alkemy.Entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-
+import java.util.Set;
 @Component
 public class PersonajeMapper {
     @Autowired
@@ -42,6 +43,7 @@ public class PersonajeMapper {
         dto.setNombre(entity.getNombre());
         dto.setEdad(entity.getEdad());
         dto.setPeso(entity.getPeso());
+        dto.setHistoria(entity.getHistoria());
         if (loadPeliculas) {
             List<PeliculaDTO> peliculasDTOS = this.peliculaMapper.peliculasEntityList2DTOList(entity.getPeliculas(), false);
             dto.setPeliculas(peliculasDTOS);
@@ -58,10 +60,7 @@ public class PersonajeMapper {
         return entities;
     }
 
-    /**
-     * @param entities (Set or List)
-     * @param loadCities
-     */
+
     public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<PersonajeEntity> entities, boolean loadPeliculas) {
         List<PersonajeDTO> dtos = new ArrayList<>();
         for (PersonajeEntity entity : entities) {

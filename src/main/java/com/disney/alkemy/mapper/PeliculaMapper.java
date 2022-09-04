@@ -62,9 +62,9 @@ private PersonajeMapper personajeMapper;
         return dto;
     }
 
-    public List<PeliculaDTO> peliculasEntityList2DTOList(List<PeliculaEntity> peliculaList, Boolean loadPersonajes) {
+    public List<PeliculaDTO> peliculasEntityList2DTOList(List<PeliculaEntity> entities, Boolean loadPersonajes) {
         List<PeliculaDTO> dtos = new ArrayList<>();
-        for (PeliculaEntity entity : peliculaList) {
+        for (PeliculaEntity entity : entities) {
             dtos.add(this.peliculaEntity2DTO(entity, loadPersonajes));
         }
         return dtos;

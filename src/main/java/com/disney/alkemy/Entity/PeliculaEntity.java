@@ -25,18 +25,17 @@ public class PeliculaEntity {
     private String titulo;
 
     @Column(name = "fecha_creacion")
-    @DateTimeFormat(pattern = "yyy/mm/dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate FechaCreacion;
 
     private Long Calificacion;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER) // TODO : SACO CASCADA
 
     @JoinColumn(name = "genero_id", insertable = false, updatable = false )
     private GeneroEntity genero;
 
-        //Con esta columna cuando quiero crear una pelicula le paso un id de genero y se crea en ese lugar//
-        //guardo y actualizo//
+        //TODO: VER NULLABLE POR SI QUIERO AGREGAR PELI SIN GENERO
     @Column(name= "genero_id", nullable = false)
     private Long generoId;
 

@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table( name= "personaje")
@@ -23,7 +25,7 @@ public class PersonajeEntity {
     private String historia;
 
 // Creo personajes solamente sin asignar peliculas ni genero
-    @ManyToMany(mappedBy = "personajes", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "personajes") // TODO: SAQUE CASCADA
     private List<PeliculaEntity> peliculas = new ArrayList<>();
 
 
