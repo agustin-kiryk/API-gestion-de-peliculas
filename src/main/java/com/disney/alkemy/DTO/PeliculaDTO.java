@@ -13,7 +13,7 @@ public class PeliculaDTO {
     private Long id;
     private String imagen;
     private String titulo;
-    private String FechaCreacion;
+    private String fechaCreacion;
     private Long calificacion;
     private Long generoId; //todo: **** CAMBIO STRING GENERO POR QUE ME DA ERROR EN EL MAPPER y service DE PELICULA ******
     private List<PersonajeDTO> personajes;

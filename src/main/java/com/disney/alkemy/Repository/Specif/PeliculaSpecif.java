@@ -38,7 +38,7 @@ public class PeliculaSpecif {
             query.distinct(true);
 
             //order resolver
-            String orderByField = "fecha_creacion";
+            String orderByField = "fechaCreacion";
             query.orderBy(
                     filtersDTO.isAsc() ?
                             criteriaBuilder.asc(root.get(orderByField)) :
