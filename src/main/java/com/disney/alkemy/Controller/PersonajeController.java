@@ -18,7 +18,11 @@ public class PersonajeController {
     @Autowired
     private PersonajeService personajeService;
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> update (@PathVariable Long id, @RequestBody PersonajeDTO personaje) {
+        PersonajeDTO result = this.personajeService.update(id, personaje);
+        return ResponseEntity.ok(result);
+    }
     @PostMapping
     public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje){
         PersonajeDTO personajeSaved = personajeService.save(personaje);
@@ -43,7 +47,7 @@ public class PersonajeController {
         List<PersonajeDTO> personajes = this.personajeService.getByFilters(nombre, edad, peso, peliculas);
         return ResponseEntity.ok(personajes);
     }
-    //Borrar generos//
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
