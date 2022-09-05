@@ -1,4 +1,6 @@
 package com.disney.alkemy.Service.impl;
+import com.disney.alkemy.DTO.PersonajeDTO;
+import com.disney.alkemy.mapper.PersonajeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.disney.alkemy.DTO.PeliculaAuxDTO;
@@ -20,6 +22,7 @@ import java.util.Optional;
 @Service
 public class PeliculaServiceImpl implements PeliculaService {
 
+    private PersonajeMapper personajeMapper;
 
     private PeliculaRepository peliculaRepository;
 
@@ -34,12 +37,14 @@ public class PeliculaServiceImpl implements PeliculaService {
             PeliculaRepository peliculaRepository,
             PeliculaSpecif peliculaSpecif,
             PeliculaMapper peliculaMapper,
-            PersonajeService personajeService
+            PersonajeService personajeService,
+            PersonajeMapper personajeMapper
     ) {
         this.peliculaRepository = peliculaRepository;
         this.peliculaSpecif = peliculaSpecif;
         this.peliculaMapper = peliculaMapper;
         this.personajeService = personajeService;
+        this.personajeMapper = personajeMapper;
     }
     @Override
     public List<PeliculaAuxDTO> getAll() {
@@ -91,6 +96,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
         PeliculaEntity entity = peliculaMapper.peliculaDTO2Entity(pelicula);
         PeliculaEntity entitySaved = peliculaRepository.save(entity);
+        List<PersonajeDTO>personajes=personajeMapper.personajeEntitySet2DTOList(entitySaved.getPersonajes(),true);
         PeliculaDTO result = peliculaMapper.peliculaEntity2DTO(entitySaved, true);
         return result;
     }

@@ -4,6 +4,7 @@ import com.disney.alkemy.DTO.PeliculaAuxDTO;
 import com.disney.alkemy.DTO.PeliculaDTO;
 import com.disney.alkemy.DTO.PersonajeDTO;
 import com.disney.alkemy.Entity.PeliculaEntity;
+import com.disney.alkemy.Entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -13,13 +14,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class PeliculaMapper {
 
 private PersonajeMapper personajeMapper;
-    @Autowired
-    public PeliculaMapper(@Lazy PersonajeMapper personajeMapper) {
+    @Autowired  //TODO: SACO @LAZY DE atributos en clase peliculamapper
+    public PeliculaMapper( PersonajeMapper personajeMapper) {
 
         this.personajeMapper = personajeMapper;
     }
@@ -43,6 +45,7 @@ private PersonajeMapper personajeMapper;
         peliculaEntity.setFechaCreacion(this.stringToLocalDate(dto.getFechaCreacion()));
         peliculaEntity.setCalificacion(dto.getCalificacion());
         peliculaEntity.setGeneroId(dto.getGeneroId());
+        Set<PersonajeEntity>personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
         return peliculaEntity;
     }
 
@@ -55,7 +58,7 @@ private PersonajeMapper personajeMapper;
         dto.setCalificacion(entity.getCalificacion());
         dto.setGeneroId(entity.getGeneroId());
         if(loadPersonajes) {
-            List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(entity.getPersonajes(), loadPersonajes);
+            List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(entity.getPersonajes(), false);
             dto.setPersonajes(personajeDTOS);
         }
 
