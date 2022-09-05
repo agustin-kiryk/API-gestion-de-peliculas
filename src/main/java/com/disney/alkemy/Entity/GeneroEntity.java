@@ -2,6 +2,8 @@ package com.disney.alkemy.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -9,7 +11,8 @@ import javax.persistence.*;
 @Table(name = "Genero")
 @Getter      //con lombok creo automaticamente los get y set//
 @Setter
-
+@SQLDelete(sql="UPDATE genero SET deleted= true WHERE id=?")
+@Where(clause="deleted=false")
 
 
 public class GeneroEntity {
@@ -20,5 +23,5 @@ public class GeneroEntity {
     private Long id;
     private String nombre;
     private  String imagen;
-
+    private boolean deleted=Boolean.FALSE;
 }

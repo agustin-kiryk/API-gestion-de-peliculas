@@ -5,6 +5,8 @@ import com.disney.alkemy.DTO.PersonajeAuxDTO;
 import com.disney.alkemy.DTO.PersonajeDTO;
 import com.disney.alkemy.Entity.PeliculaEntity;
 import com.disney.alkemy.Entity.PersonajeEntity;
+import com.disney.alkemy.Repository.PeliculaRepository;
+import com.disney.alkemy.Repository.PersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,11 @@ import java.util.Set;
 public class PersonajeMapper {
     @Autowired
     private PeliculaMapper peliculaMapper;
+    @Autowired
+    private PersonajeRepository personajeRepository;
+    @Autowired
+    PeliculaRepository peliculaRepository;
+
 
     public void personajeEntityRefreshValues(PersonajeEntity entity, PersonajeDTO dto) {
         entity.setImagen(dto.getImagen());

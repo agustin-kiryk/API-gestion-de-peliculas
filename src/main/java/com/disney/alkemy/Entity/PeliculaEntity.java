@@ -2,6 +2,8 @@ package com.disney.alkemy.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,7 +15,8 @@ import java.util.Set;
 @Table(name = "Pelicula" )
 @Getter
 @Setter
-
+@SQLDelete(sql="UPDATE pelicula SET deleted= true WHERE id=?")
+@Where(clause="deleted=false")
 public class PeliculaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -51,7 +54,7 @@ public class PeliculaEntity {
             inverseJoinColumns = @JoinColumn(name="personaje_id")
     )
     private Set<PersonajeEntity> personajes = new HashSet<>();
-
+    private boolean deleted = Boolean.FALSE;
 
     public void addPersonaje(PersonajeEntity personaje) {
         this.personajes.add(personaje);

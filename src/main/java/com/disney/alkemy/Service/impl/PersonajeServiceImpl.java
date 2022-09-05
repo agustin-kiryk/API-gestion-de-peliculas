@@ -4,6 +4,7 @@ import com.disney.alkemy.DTO.PersonajeAuxDTO;
 import com.disney.alkemy.DTO.PersonajeDTO;
 import com.disney.alkemy.DTO.PersonajeFiltersDTO;
 import com.disney.alkemy.Entity.PersonajeEntity;
+import com.disney.alkemy.Repository.PeliculaRepository;
 import com.disney.alkemy.Repository.PersonajeRepository;
 import com.disney.alkemy.Repository.Specif.PersonajeSpecif;
 import com.disney.alkemy.Service.PersonajeService;
@@ -27,6 +28,9 @@ public class PersonajeServiceImpl implements PersonajeService {
     private PersonajeSpecif personajeSpecif;
     @Autowired
     private PersonajeMapper personajeMapper;
+    @Autowired
+    PeliculaRepository peliculaRepository;
+
 
 
 

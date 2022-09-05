@@ -5,6 +5,9 @@ import com.disney.alkemy.DTO.PeliculaDTO;
 import com.disney.alkemy.DTO.PersonajeDTO;
 import com.disney.alkemy.Entity.PeliculaEntity;
 import com.disney.alkemy.Entity.PersonajeEntity;
+import com.disney.alkemy.Repository.GeneroRepository;
+import com.disney.alkemy.Repository.PeliculaRepository;
+import com.disney.alkemy.Repository.PersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -18,13 +21,21 @@ import java.util.Set;
 
 @Component
 public class PeliculaMapper {
-
-private PersonajeMapper personajeMapper;
-    @Autowired  //TODO: SACO @LAZY DE atributos en clase peliculamapper
+    @Autowired
+    private PersonajeMapper personajeMapper;
+   /** @Autowired  //TODO: SACO @LAZY DE atributos en clase peliculamapper
     public PeliculaMapper( PersonajeMapper personajeMapper) {
 
         this.personajeMapper = personajeMapper;
-    }
+    }**/
+   @Autowired
+   private PersonajeRepository personajeRepository;
+   @Autowired
+   private PeliculaRepository peliculaRepository;
+   @Autowired
+   private GeneroMapper generoMapper;
+   @Autowired
+   private GeneroRepository generoRepository;
     private LocalDate stringToLocalDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(stringDate, formatter);
@@ -46,6 +57,7 @@ private PersonajeMapper personajeMapper;
         peliculaEntity.setCalificacion(dto.getCalificacion());
         peliculaEntity.setGeneroId(dto.getGeneroId());
         Set<PersonajeEntity>personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
+        peliculaEntity.setPersonajes(personajes);
         return peliculaEntity;
     }
 

@@ -1,5 +1,6 @@
 package com.disney.alkemy.Service.impl;
 import com.disney.alkemy.DTO.PersonajeDTO;
+import com.disney.alkemy.Repository.PersonajeRepository;
 import com.disney.alkemy.mapper.PersonajeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     private PersonajeService personajeService;
 
+    private PersonajeRepository personajeRepository;
+
+
     @Autowired
     public PeliculaServiceImpl(
             PeliculaRepository peliculaRepository,
@@ -56,7 +60,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     @Override
     public PeliculaDTO getDetailsById(Long id) {
-        Optional<PeliculaEntity> entity = Optional.of(peliculaRepository.getReferenceById(id));
+        Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
         if (!entity.isPresent()) {
             throw new ParamNotFound("id de pelicula invalido");
         }
@@ -103,13 +107,26 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     @Override
     public void addPersonaje(Long id, Long idPersonaje) {
-        PeliculaEntity entity = this.peliculaRepository.getReferenceById(id);
-        entity.getPersonajes().size();
-        PersonajeEntity personajeEntity = this.personajeService.getEntityById(idPersonaje);
-        entity.addPersonaje(personajeEntity);
-        this.peliculaRepository.save(entity);
+        Optional<PeliculaEntity> pelicula= this.peliculaRepository.findById(id);
+        Optional<PersonajeEntity> personaje= this.personajeRepository.findById(idPersonaje);
+        if (!pelicula.isPresent() && !personaje.isPresent())
+            throw new ParamNotFound("id invalido");
+        else
+        if(!pelicula.isPresent())
+            throw new ParamNotFound("ID pelicula invalido");
+        else
+        if(!personaje.isPresent())
+            throw new ParamNotFound("ID personaje invalido");
+        if (!pelicula.get().getPersonajes().contains(personaje.get()))
+        {
+            pelicula.get().getPersonajes().add(personaje.get());
+            peliculaRepository.save(pelicula.get());
+        }
+        personaje.get().getPeliculas().add(pelicula.get());
+        personajeRepository.save(personaje.get());
 
     }
+
 
     @Override
     public void removePersonaje(Long id, Long idPersonaje) {
