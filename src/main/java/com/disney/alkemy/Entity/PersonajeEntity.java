@@ -16,8 +16,8 @@ import java.util.Set;
 @Table( name= "personaje")
 @Getter
 @Setter
-@SQLDelete(sql="UPDATE personajes SET deleted = true Where id=?")
-@Where(clause= "deleted = false")
+@SQLDelete(sql = "UPDATE personaje SET deleted = true WHERE id=?")
+@Where(clause= "deleted=false")
 public class PersonajeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,11 +27,11 @@ public class PersonajeEntity {
     private Long edad;
     private Long peso;
     private String historia;
-
+    private boolean deleted = Boolean.FALSE;
 // Creo personajes solamente sin asignar peliculas ni genero
     @ManyToMany(mappedBy = "personajes") // TODO: SAQUE CASCADA
     private List<PeliculaEntity> peliculas = new ArrayList<>();
-    private boolean deleted = Boolean.FALSE;
+
 
 
 

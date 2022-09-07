@@ -4,6 +4,7 @@ import com.disney.alkemy.DTO.GeneroDTO;
 import com.disney.alkemy.Entity.GeneroEntity;
 import com.disney.alkemy.Repository.GeneroRepository;
 import com.disney.alkemy.Service.GeneroService;
+import com.disney.alkemy.exceptions.ParamNotFound;
 import com.disney.alkemy.mapper.GeneroMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,10 @@ private GeneroMapper generoMapper;
 
     @Override
     public void delete(Long id) {
+        Optional<GeneroEntity> entity = generoRepository.findById(id);
+        if (!entity.isPresent()){
+            throw new ParamNotFound("No se encontro erl ID del Genero");
+        }
         this.generoRepository.deleteById(id);
     }
 

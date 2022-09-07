@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @RestController
 @RequestMapping("movies")
@@ -27,53 +28,52 @@ public class PeliculaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PeliculaDTO> getDetailsById(@PathVariable Long id) {
+    public ResponseEntity<PeliculaDTO> getDetailsById(@Valid @PathVariable Long id) {
         PeliculaDTO pelicula = this.peliculaService.getDetailsById(id);
         return ResponseEntity.ok(pelicula);
     }
 
     @GetMapping
     public ResponseEntity<List<PeliculaDTO>> getDetailsByFilters(
-             @RequestParam(required = false) String titulo,
-             @RequestParam(required = false) Long genero,
-             @RequestParam(required = false, defaultValue = "ASC") String order
+          @Valid @RequestParam(required = false) String titulo,
+          @Valid @RequestParam(required = false) Long genero,
+          @Valid @RequestParam(required = false, defaultValue = "ASC") String order
     ) {
         List<PeliculaDTO> peliculas = this.peliculaService.getDetailsByFilters(titulo, genero, order);
         return ResponseEntity.ok(peliculas);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PeliculaDTO> update (@PathVariable Long id, @RequestBody PeliculaDTO pelicula) {
+    public ResponseEntity<PeliculaDTO> update (@Valid @PathVariable Long id, @RequestBody PeliculaDTO pelicula) {
         PeliculaDTO result = this.peliculaService.update(id, pelicula);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping
     public ResponseEntity<PeliculaDTO> save(
-            @RequestBody PeliculaDTO pelicula) {
+           @Valid @RequestBody PeliculaDTO pelicula) {
         PeliculaDTO result = peliculaService.save(pelicula);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @PostMapping("/{id}/characters/{idCharacters}")
-    public ResponseEntity<Void> addPersonaje(
-            @PathVariable Long id,
-            @PathVariable Long idPersonaje){
+    public ResponseEntity<Void> add(
+          @Valid @PathVariable Long id,
+          @Valid @PathVariable Long idPersonaje){
         this.peliculaService.addPersonaje(id, idPersonaje);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/{id}/characters/{idCharacters}")
     public ResponseEntity<Void> delete(
-             @PathVariable Long id,
-             @PathVariable Long idPersonaje) {
+          @Valid   @PathVariable("id") Long id,
+          @Valid   @PathVariable("idPersonaje") Long idPersonaje) {
         this.peliculaService.removePersonaje(id, idPersonaje);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(
-            @PathVariable Long id) {
+    public ResponseEntity<Void> delete(@Valid @PathVariable Long id) {
         this.peliculaService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

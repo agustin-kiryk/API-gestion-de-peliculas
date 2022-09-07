@@ -105,6 +105,10 @@ public class PersonajeServiceImpl implements PersonajeService {
 
     @Override
     public void delete(Long id) {
+        Optional<PersonajeEntity> entity = personajeRepository.findById(id);
+        if (!entity.isPresent()){
+            throw new ParamNotFound("no se encontro ID de personaje");
+        }
         this.personajeRepository.deleteById(id);
     }
 }
