@@ -60,7 +60,7 @@ public class PeliculaEntity {
         this.personajes.add(personaje);
     }
 
-    public void removePersonaje(PersonajeEntity personaje) {
+    public void removePersonaje (PersonajeEntity personaje) {
         this.personajes.remove(personaje);
     }
 

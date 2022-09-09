@@ -47,9 +47,9 @@ public class PersonajeServiceImpl implements PersonajeService {
 
 
     @Override
-    public List<PersonajeAuxDTO> getAllpersonajes() {
+    public List<PersonajeDTO> getAllpersonajes() {
         List<PersonajeEntity> entities = personajeRepository.findAll();
-        List<PersonajeAuxDTO> result = personajeMapper.personajeEntitySet2AuxDTOList(entities);
+        List<PersonajeDTO> result = personajeMapper.personajeEntitySet2DTOList(entities,true);
         return result;
     }
 
@@ -95,10 +95,10 @@ public class PersonajeServiceImpl implements PersonajeService {
 
 
     @Override
-    public List<PersonajeDTO> getByFilters(String nombre, Long edad, Long peso, Set<Long> peliculas) {
+    public List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Long peso, Set<Long> peliculas) {
         PersonajeFiltersDTO filtersDTO = new PersonajeFiltersDTO(nombre, edad, peso, peliculas);
         List<PersonajeEntity> entities = this.personajeRepository.findAll(this.personajeSpecif.getByFilters(filtersDTO));
-        List<PersonajeDTO> dtos = this.personajeMapper.personajeEntitySet2DTOList(entities, true);
+        List<PersonajeAuxDTO> dtos = this.personajeMapper.personajeEntitySet2AuxDTOList(entities/*,true*/);
         return dtos;
     }
 

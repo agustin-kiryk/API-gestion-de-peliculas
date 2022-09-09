@@ -8,8 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PersonajeAuxDTO {
-    private Long id;
+    //private Long id;
     private String imagen;
     private String nombre;
 }

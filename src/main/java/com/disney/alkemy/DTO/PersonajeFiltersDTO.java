@@ -10,6 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class PersonajeFiltersDTO {
     private String nombre;

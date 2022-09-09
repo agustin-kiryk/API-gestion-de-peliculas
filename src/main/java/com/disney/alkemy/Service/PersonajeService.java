@@ -12,11 +12,11 @@ public interface PersonajeService {
 
 
 
-    List<PersonajeDTO> getByFilters(String nombre, Long edad, Long peso, Set<Long> peliculas);
+    List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Long peso, Set<Long> peliculas);
 
     void delete(Long id);
 
-    List<PersonajeAuxDTO> getAllpersonajes();
+    List<PersonajeDTO> getAllpersonajes();
 
     PersonajeEntity getEntityById(Long idPersonaje);
 

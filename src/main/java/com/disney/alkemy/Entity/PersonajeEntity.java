@@ -28,13 +28,32 @@ public class PersonajeEntity {
     private Long peso;
     private String historia;
     private boolean deleted = Boolean.FALSE;
-// Creo personajes solamente sin asignar peliculas ni genero
+    // Creo personajes solamente sin asignar peliculas ni genero
     @ManyToMany(mappedBy = "personajes") // TODO: SAQUE CASCADA
     private List<PeliculaEntity> peliculas = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof PersonajeEntity)) {
+            return false;
 
+        } else {
+            PersonajeEntity personajeEntity = (PersonajeEntity) obj;
+            if (this.getId() != null) {
+                return this.getId().equals((personajeEntity.getId()));
+            } else {
+                return false;
+            }
 
-
-
+        }
+    }
 
 }
+
+
+
+
+

@@ -98,9 +98,10 @@ public class PeliculaMapper {
         PeliculaAuxDTO auxDTO;
         for (PeliculaEntity entity : entities) {
             auxDTO = new PeliculaAuxDTO();
-            auxDTO.setId(entity.getId());
+          //  auxDTO.setId(entity.getId());
             auxDTO.setImagen(entity.getImagen());
             auxDTO.setTitulo(entity.getTitulo());
+            auxDTO.setFechaCreacion(entity.getFechaCreacion().toString());
             dtos.add(auxDTO);
         }
         return dtos;

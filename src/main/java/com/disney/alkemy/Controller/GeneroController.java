@@ -2,12 +2,15 @@ package com.disney.alkemy.Controller;
 
 import com.disney.alkemy.DTO.GeneroDTO;
 import com.disney.alkemy.Service.GeneroService;
+
+import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 import java.util.List;
 
 @RestController
@@ -23,7 +26,7 @@ public class GeneroController {
 
     //Traer Generos//
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<GeneroDTO>> getAll(){
         List<GeneroDTO> generos = generoService.getAllgeneros();
         return ResponseEntity.ok().body(generos);

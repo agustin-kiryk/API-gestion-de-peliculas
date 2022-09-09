@@ -6,7 +6,9 @@ import com.disney.alkemy.Repository.GeneroRepository;
 import com.disney.alkemy.Service.GeneroService;
 import com.disney.alkemy.exceptions.ParamNotFound;
 import com.disney.alkemy.mapper.GeneroMapper;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +41,10 @@ private GeneroMapper generoMapper;
 
     @Override
     public GeneroDTO getDetailsById(Long id) {
-        Optional<GeneroEntity> entity = Optional.of(generoRepository.getReferenceById(id));
+        Optional<GeneroEntity> entity = (generoRepository.findById(id));
+        if (entity.isEmpty()){
+            throw new ParamNotFound("El ID de Genero no existe");
+        }
         GeneroDTO generoDTO = generoMapper.generoEntity2DTO(entity.get());
         return generoDTO;
 

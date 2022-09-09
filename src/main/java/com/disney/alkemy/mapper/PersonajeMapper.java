@@ -78,17 +78,17 @@ public class PersonajeMapper {
 
     public List<PersonajeAuxDTO> personajeEntitySet2AuxDTOList(Collection<PersonajeEntity> entities) {
         List<PersonajeAuxDTO> dtos = new ArrayList<>();
-        PersonajeAuxDTO auxDTO;
         for (PersonajeEntity entity : entities) {
-            auxDTO = new PersonajeAuxDTO();
-            auxDTO.setId(entity.getId());
-            auxDTO.setImagen(entity.getImagen());
-            auxDTO.setNombre(entity.getNombre());
-            dtos.add(auxDTO);
+            dtos.add(personajeEntity2AuxDTO(entity));
         }
         return dtos;
     }
-
+    public PersonajeAuxDTO personajeEntity2AuxDTO (PersonajeEntity entity){
+        PersonajeAuxDTO dto = new PersonajeAuxDTO();
+        dto.setNombre(entity.getNombre());
+        dto.setImagen(entity.getImagen());
+        return dto;
+    }
 
 
 

@@ -12,7 +12,7 @@ public interface PeliculaService {
     PeliculaDTO getDetailsById(Long id);
 
 
-    List<PeliculaDTO> getDetailsByFilters(String titulo, Long genero, String order);
+    List<PeliculaAuxDTO> getDetailsByFilters(String titulo, Long genero, String order);
 
     PeliculaDTO update(Long id, PeliculaDTO pelicula);
 
@@ -20,7 +20,7 @@ public interface PeliculaService {
 
     void addPersonaje(Long id, Long idPersonaje);
 
-    void removePersonaje(Long id, Long idPersonaje);
+    PeliculaDTO removePersonaje(Long id, Long idPersonaje);
 
     void delete(Long id);
 }

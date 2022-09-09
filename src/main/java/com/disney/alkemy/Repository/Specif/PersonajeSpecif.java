@@ -1,21 +1,15 @@
 package com.disney.alkemy.Repository.Specif;
-
-import com.disney.alkemy.DTO.PeliculaFiltersDTO;
 import com.disney.alkemy.DTO.PersonajeFiltersDTO;
 import com.disney.alkemy.Entity.PeliculaEntity;
 import com.disney.alkemy.Entity.PersonajeEntity;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 @Component
@@ -29,19 +23,19 @@ public class PersonajeSpecif {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("nombre")),
-                                "%" + filtersDTO.getNombre().toLowerCase() + "%"
-                        )
+                                "%" + filtersDTO.getNombre().toLowerCase() + "%")
+
                 );
             }
 
             if (filtersDTO.getEdad() != null) {
                 predicates.add(
-                        criteriaBuilder.equal(root.<Integer>get("edad"), filtersDTO.getEdad())
+                        criteriaBuilder.equal(root.<Integer>get("edad"), "%" + filtersDTO.getEdad()+ "%")
                 );
             }
             if (filtersDTO.getPeso() != null) {
                 predicates.add(
-                        criteriaBuilder.equal(root.<Integer>get("peso"), filtersDTO.getPeso())
+                        criteriaBuilder.equal(root.<Integer>get("peso"), "%"+filtersDTO.getPeso()+ "%")
                 );
             }
 

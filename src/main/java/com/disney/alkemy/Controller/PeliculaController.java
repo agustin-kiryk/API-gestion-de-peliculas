@@ -2,6 +2,7 @@ package com.disney.alkemy.Controller;
 
 import com.disney.alkemy.DTO.PeliculaAuxDTO;
 import com.disney.alkemy.DTO.PeliculaDTO;
+import com.disney.alkemy.Entity.PeliculaEntity;
 import com.disney.alkemy.Service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
+
 @RestController
-@RequestMapping("movies")
+@RequestMapping("/movies")
 public class PeliculaController {
 
 
@@ -21,7 +24,7 @@ public class PeliculaController {
         this.peliculaService = peliculaService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<PeliculaAuxDTO>> getAll() {
         List<PeliculaAuxDTO> peliculas = peliculaService.getAll();
         return ResponseEntity.ok(peliculas);
@@ -34,12 +37,12 @@ public class PeliculaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PeliculaDTO>> getDetailsByFilters(
+    public ResponseEntity<List<PeliculaAuxDTO>> getDetailsByFilters(
           @Valid @RequestParam(required = false) String titulo,
           @Valid @RequestParam(required = false) Long genero,
           @Valid @RequestParam(required = false, defaultValue = "ASC") String order
     ) {
-        List<PeliculaDTO> peliculas = this.peliculaService.getDetailsByFilters(titulo, genero, order);
+        List<PeliculaAuxDTO> peliculas = this.peliculaService.getDetailsByFilters(titulo, genero, order);
         return ResponseEntity.ok(peliculas);
     }
 
@@ -56,16 +59,16 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @PostMapping("/{id}/characters/{idCharacters}")
+    @PostMapping("/{id}/characters/{idPersonaje}")
     public ResponseEntity<Void> add(
-          @Valid @PathVariable Long id,
-          @Valid @PathVariable Long idPersonaje){
+          @Valid @PathVariable("id") Long id,
+          @Valid @PathVariable("idPersonaje") Long idPersonaje){
         this.peliculaService.addPersonaje(id, idPersonaje);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/{id}/characters/{idCharacters}")
-    public ResponseEntity<Void> delete(
+    @DeleteMapping("/{id}/characters/{idPersonaje}")
+    public ResponseEntity<PeliculaDTO> delete(
           @Valid   @PathVariable("id") Long id,
           @Valid   @PathVariable("idPersonaje") Long idPersonaje) {
         this.peliculaService.removePersonaje(id, idPersonaje);
