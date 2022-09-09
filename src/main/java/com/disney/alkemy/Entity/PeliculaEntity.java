@@ -61,7 +61,7 @@ public class PeliculaEntity {
     }
 
     public void removePersonaje (PersonajeEntity personaje) {
-        this.personajes.remove(personaje);
+       this.personajes.remove(personaje);
     }
 
 }

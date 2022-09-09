@@ -6,11 +6,9 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table( name= "personaje")
@@ -27,11 +25,12 @@ public class PersonajeEntity {
     private Long edad;
     private Long peso;
     private String historia;
-    private boolean deleted = Boolean.FALSE;
+
     // Creo personajes solamente sin asignar peliculas ni genero
     @ManyToMany(mappedBy = "personajes") // TODO: SAQUE CASCADA
     private List<PeliculaEntity> peliculas = new ArrayList<>();
 
+    private boolean deleted = Boolean.FALSE;
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -42,15 +41,19 @@ public class PersonajeEntity {
 
         } else {
             PersonajeEntity personajeEntity = (PersonajeEntity) obj;
-            if (this.getId() != null) {
-                return this.getId().equals((personajeEntity.getId()));
+            if (this.getId()!=null) {
+                return this.getId().equals(personajeEntity.getId());
+
             } else {
                 return false;
             }
 
         }
     }
-
+    @Override
+    public int hashCode(){
+        return Objects.hash(id,imagen,nombre);
+    }
 }
 
 

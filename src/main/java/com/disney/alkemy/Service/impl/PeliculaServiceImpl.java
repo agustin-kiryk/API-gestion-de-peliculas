@@ -110,11 +110,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     @Override
     public void addPersonaje(Long id, Long idPersonaje) {
-      /*  Optional<PeliculaEntity> entity = this.peliculaRepository.findById(id);
-        Optional<PersonajeEntity> personajeEntity= this.personajeRepository.findById(idPersonaje);
-        if (!entity.isPresent()|| !personajeEntity.isPresent()){
-        throw new ParamNotFound("ID invalido");
-        }*/
+
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
                 ()->new ParamNotFound("no se encuentra el id de pelicula"));
         PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
@@ -125,10 +121,10 @@ public class PeliculaServiceImpl implements PeliculaService {
 
 
     @Override
-    public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
+   /* public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
                 ()->new ParamNotFound("no se encuentra el id de pelicula"));
-        //entity.getPersonajes().size();
+
         PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
                 ()-> new ParamNotFound("no se encuentra el id de personaje"));
         entity.getPersonajes().remove(personajeEntity);
@@ -136,11 +132,36 @@ public class PeliculaServiceImpl implements PeliculaService {
         PeliculaDTO result= this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
         return result;
 
-        //entity.removePersonaje(personajeEntity);
-        //this.peliculaRepository.
-        //save(entity);
 
+    }*/
+    public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
+        PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
+                () -> new ParamNotFound("no se encuentra el id de pelicula"));
+
+
+        PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
+                () -> new ParamNotFound("El personaje no se encuentra en esta pelicula"));
+
+        PersonajeEntity personaje = new PersonajeEntity();
+
+        personaje.setPeliculas(personajeEntity.getPeliculas());
+        personaje.setImagen(personajeEntity.getImagen());
+        personaje.setNombre(personajeEntity.getNombre());
+        personaje.setEdad(personajeEntity.getEdad());
+        personaje.setId(personajeEntity.getId());
+        personaje.setPeso(personajeEntity.getPeso());
+        personaje.setHistoria(personajeEntity.getHistoria());
+        personaje.setDeleted(Boolean.FALSE);
+
+        entity.getPersonajes().remove(personaje);
+        PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
+        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
+        return result;
     }
+
+
+
+
 
     @Override
     public void delete(Long id) {

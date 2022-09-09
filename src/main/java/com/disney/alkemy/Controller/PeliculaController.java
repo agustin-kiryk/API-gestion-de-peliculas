@@ -68,11 +68,11 @@ public class PeliculaController {
     }
 
     @DeleteMapping("/{id}/characters/{idPersonaje}")
-    public ResponseEntity<PeliculaDTO> delete(
+    public ResponseEntity<PeliculaDTO> removePersonaje(
           @Valid   @PathVariable("id") Long id,
           @Valid   @PathVariable("idPersonaje") Long idPersonaje) {
-        this.peliculaService.removePersonaje(id, idPersonaje);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        PeliculaDTO dto = this.peliculaService.removePersonaje(id, idPersonaje);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
     @DeleteMapping("/{id}")
