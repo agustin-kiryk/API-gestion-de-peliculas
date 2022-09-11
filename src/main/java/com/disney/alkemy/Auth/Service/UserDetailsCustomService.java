@@ -5,7 +5,8 @@ import com.disney.alkemy.Auth.DTO.AuthenticationResponse;
 import com.disney.alkemy.Auth.DTO.UserDTO;
 import com.disney.alkemy.Auth.Entity.UserEntity;
 import com.disney.alkemy.Auth.Repository.UserRepository;
-import com.disney.alkemy.Service.impl.EmailService;
+import com.disney.alkemy.Service.EmailService;
+import com.disney.alkemy.Service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -52,14 +53,16 @@ public class UserDetailsCustomService implements UserDetailsService {
     }
 
     public boolean save(UserDTO userDTO) {
+        UserEntity user = userRepository.findByUsername(userDTO.getUsername());
+        if(user != null) {
+            throw new BadCredentialsException("El nombre de usuario ya está en uso");
+        }
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDTO.getUsername());
-        userEntity.setPassword(userDTO.getPassword());
-        userEntity= this.userRepository.save(userEntity);
-        if (userEntity!= null){
-            emailService.sendWelcomeEmailTo(userEntity.getUsername());
-        }
-        return userEntity!= null;
+        userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userEntity = userRepository.save(userEntity);
+        emailService.sendWelcomeEmailTo(userEntity.getUsername());
+        return true;
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) throws Exception {

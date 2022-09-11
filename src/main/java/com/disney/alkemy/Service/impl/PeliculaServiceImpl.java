@@ -117,11 +117,12 @@ public class PeliculaServiceImpl implements PeliculaService {
                 ()->new ParamNotFound("no se encuentra el id de personaje"));
         entity.addPersonaje(personajeEntity);
       this.peliculaRepository.save(entity);
+
     }
 
 
     @Override
-   /* public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
+    public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
                 ()->new ParamNotFound("no se encuentra el id de pelicula"));
 
@@ -133,8 +134,8 @@ public class PeliculaServiceImpl implements PeliculaService {
         return result;
 
 
-    }*/
-    public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
+    }
+   /* public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
                 () -> new ParamNotFound("no se encuentra el id de pelicula"));
 
@@ -152,12 +153,13 @@ public class PeliculaServiceImpl implements PeliculaService {
         personaje.setPeso(personajeEntity.getPeso());
         personaje.setHistoria(personajeEntity.getHistoria());
         personaje.setDeleted(Boolean.FALSE);
-
+        int valorHashEntity = personajeEntity.hashCode();
+        int valorHashEntityNueva = personaje .hashCode();
         entity.getPersonajes().remove(personaje);
         PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
         PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
         return result;
-    }
+    }*/
 
 
 

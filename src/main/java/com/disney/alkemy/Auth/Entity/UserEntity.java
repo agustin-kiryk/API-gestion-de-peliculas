@@ -15,6 +15,7 @@ import java.util.Collection;
 @Setter
 @Getter
 @Entity
+
 public class UserEntity implements UserDetails {
 
     @Id

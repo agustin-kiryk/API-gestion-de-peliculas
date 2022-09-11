@@ -50,10 +50,11 @@ public class PersonajeEntity {
 
         }
     }
-    @Override
+
+   /* @Override
     public int hashCode(){
         return Objects.hash(id,imagen,nombre);
-    }
+    }*/
 }
 
 
