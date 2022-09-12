@@ -31,6 +31,7 @@ public class UserAuthController {
     public ResponseEntity<AuthenticationResponse> signIn(@Valid @RequestBody AuthenticationRequest request) throws Exception {
         AuthenticationResponse response = service.authenticate(request);
         return ResponseEntity.ok(response);
+
     }
 
 }

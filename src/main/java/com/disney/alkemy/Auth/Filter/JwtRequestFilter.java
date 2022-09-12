@@ -2,8 +2,10 @@ package com.disney.alkemy.Auth.Filter;
 
 import com.disney.alkemy.Auth.Service.JwtUtils;
 import com.disney.alkemy.Auth.Service.UserDetailsCustomService;
+import com.disney.alkemy.exceptions.ParamNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,8 +38,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             final String authorizationHeader = request.getHeader("Authorization");
 
+
+
             String username = null;
             String jwt = null;
+
+
+
 
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 jwt = authorizationHeader.substring(7);
@@ -56,6 +63,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
             }
         chain.doFilter(request, response);
+
         }
 
     }

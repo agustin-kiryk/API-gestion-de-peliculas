@@ -5,6 +5,7 @@ import com.disney.alkemy.exceptions.ParamNotFound;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,6 +20,16 @@ import java.util.List;
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(value = {Throwable.class})
+    protected  ResponseEntity<Object> handleThrowable (Throwable ex, WebRequest request){
+        ApiErrorDTO errorDTO = new ApiErrorDTO(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ex.getMessage(),
+                Arrays.asList("")
+        );
+        return  handleExceptionInternal((Exception) ex, errorDTO, new HttpHeaders(),HttpStatus.BAD_REQUEST,request );
+    }
+
 
     @ExceptionHandler(value = {ParamNotFound.class})
     protected ResponseEntity<Object> handleParamNotFound(RuntimeException ex, WebRequest request) {
@@ -35,6 +46,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String bodyOfResponse = "Esto debe ser específico de la aplicación";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
+    @ExceptionHandler(value = {BadCredentialsException.class})
+    protected ResponseEntity<Object> handleBadCredentialsException(RuntimeException ex, WebRequest request) {
+        ApiErrorDTO errorDTO = new ApiErrorDTO(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                Arrays.asList("BadCredentialsException")
+        );
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(

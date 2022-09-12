@@ -21,15 +21,17 @@ public class EmailServiceImpl implements EmailService {
         @Autowired
         private Environment env;
 
+
         @Value("${alkemy.disney.email.sender}")
         private String emailSender;
+
 
         public void sendWelcomeEmailTo(String to){
             String apiKey = env.getProperty("EMAIL_API_KEY");
 
             Email fromEmail = new Email(emailSender);
             Email toEmail = new Email(to);
-            Content content = new Content("text/plain", "Bienvenido al portal de peliculas! :) ");
+            Content content = new Content("text/plain", "Bienvenido al portal de peliculas! :) " );
             String subject = "Te registraste correctamente :) !";
 
             Mail mail = new Mail(fromEmail, subject, toEmail, content);

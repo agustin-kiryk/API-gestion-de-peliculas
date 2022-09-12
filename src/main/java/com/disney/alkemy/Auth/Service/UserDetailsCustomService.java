@@ -47,7 +47,7 @@ public class UserDetailsCustomService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUsername(username);
         if (userEntity == null) {
-            throw new UsernameNotFoundException("Usuario o pasword invalidos");
+            throw new BadCredentialsException("Usuario o pasword invalidos");
         }
         return new User(userEntity.getUsername(), userEntity.getPassword(), Collections.emptyList());
     }
@@ -80,4 +80,5 @@ public class UserDetailsCustomService implements UserDetailsService {
         final String jwt = jwtUtils.generateToken(userDetails);
         return new AuthenticationResponse(jwt);
     }
+
 }

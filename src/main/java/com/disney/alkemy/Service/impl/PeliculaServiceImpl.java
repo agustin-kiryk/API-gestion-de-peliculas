@@ -64,9 +64,7 @@ public class PeliculaServiceImpl implements PeliculaService {
     @Override
     public PeliculaDTO getDetailsById(Long id) {
         Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
-        if (!entity.isPresent()) {
-            throw new ParamNotFound("id de pelicula invalido");
-        }
+
         PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(entity.get(), true);
         return peliculaDTO;
 
