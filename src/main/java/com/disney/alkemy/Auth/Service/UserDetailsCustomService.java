@@ -47,7 +47,7 @@ public class UserDetailsCustomService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUsername(username);
         if (userEntity == null) {
-            throw new BadCredentialsException("Usuario o pasword invalidos");
+            throw new UsernameNotFoundException("Usuario o pasword invalidos");
         }
         return new User(userEntity.getUsername(), userEntity.getPassword(), Collections.emptyList());
     }
@@ -55,7 +55,7 @@ public class UserDetailsCustomService implements UserDetailsService {
     public boolean save(UserDTO userDTO) {
         UserEntity user = userRepository.findByUsername(userDTO.getUsername());
         if(user != null) {
-            throw new BadCredentialsException("El nombre de usuario ya está en uso");
+            throw new UsernameNotFoundException("El nombre de usuario ya está en uso");
         }
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDTO.getUsername());
