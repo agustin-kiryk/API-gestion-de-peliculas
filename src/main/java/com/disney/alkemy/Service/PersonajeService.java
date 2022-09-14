@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 public interface PersonajeService {
+
     PersonajeDTO save (PersonajeDTO dto);
 
-
-
-    List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Long peso, Set<Long> peliculas);
+    List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Set<Long> peliculas);
 
     void delete(Long id);
 
@@ -22,6 +21,6 @@ public interface PersonajeService {
 
     PersonajeDTO getDetailsById(Long id);
 
-
     PersonajeDTO update(Long id, PersonajeDTO personaje);
+
 }

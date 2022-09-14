@@ -23,7 +23,7 @@ public class PersonajeEntity {
     private String imagen;
     private String nombre;
     private Long edad;
-    private Long peso;
+    private Double peso;
     private String historia;
 
     // Creo personajes solamente sin asignar peliculas ni genero

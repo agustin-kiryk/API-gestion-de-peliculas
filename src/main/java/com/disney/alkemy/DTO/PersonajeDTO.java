@@ -17,7 +17,7 @@ public class PersonajeDTO {
     @Positive
     private Long edad;
     @Positive
-    private Long peso;
+    private Double peso;
     private String historia;
     private List<PeliculaDTO> peliculas;
 

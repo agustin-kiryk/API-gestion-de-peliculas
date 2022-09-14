@@ -24,7 +24,7 @@ import java.util.Optional;
 @Service
 public class PeliculaServiceImpl implements PeliculaService {
 
- //   private PersonajeMapper personajeMapper;
+
 
     private PeliculaRepository peliculaRepository;
 
@@ -44,35 +44,27 @@ public class PeliculaServiceImpl implements PeliculaService {
             PeliculaMapper peliculaMapper,
             PersonajeService personajeService,
           PersonajeRepository personajeRepository
-          //  PersonajeMapper personajeMapper
     ) {
         this.peliculaRepository = peliculaRepository;
         this.peliculaSpecif = peliculaSpecif;
         this.peliculaMapper = peliculaMapper;
         this.personajeService = personajeService;
         this.personajeRepository = personajeRepository;
-       // this.personajeMapper = personajeMapper;
     }
     @Override
     public List<PeliculaAuxDTO> getAll() {
         List<PeliculaEntity> entities = peliculaRepository.findAll();
         List<PeliculaAuxDTO> peliculaAuxDTO = peliculaMapper.peliculasEntityList2AuxDTOList(entities);
         return peliculaAuxDTO;
-
     }
 
     @Override
     public PeliculaDTO getDetailsById(Long id) {
-        Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
-
-        PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(entity.get(), true);
+        PeliculaEntity entity = peliculaRepository.findById(id).orElseThrow(
+                ()->new ParamNotFound("no se encuentra el id de pelicula"));
+        PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(entity, true);
         return peliculaDTO;
-
-
     }
-
-
-
 
     @Override
     public List<PeliculaAuxDTO> getDetailsByFilters(String titulo, Long genero, String order) {
@@ -118,57 +110,24 @@ public class PeliculaServiceImpl implements PeliculaService {
 
     }
 
-
     @Override
     public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
+
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
                 ()->new ParamNotFound("no se encuentra el id de pelicula"));
-
         PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
                 ()-> new ParamNotFound("no se encuentra el id de personaje"));
         entity.getPersonajes().remove(personajeEntity);
         PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
         PeliculaDTO result= this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
+
         return result;
-
-
     }
-   /* public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
-        PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
-                () -> new ParamNotFound("no se encuentra el id de pelicula"));
-
-
-        PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
-                () -> new ParamNotFound("El personaje no se encuentra en esta pelicula"));
-
-        PersonajeEntity personaje = new PersonajeEntity();
-
-        personaje.setPeliculas(personajeEntity.getPeliculas());
-        personaje.setImagen(personajeEntity.getImagen());
-        personaje.setNombre(personajeEntity.getNombre());
-        personaje.setEdad(personajeEntity.getEdad());
-        personaje.setId(personajeEntity.getId());
-        personaje.setPeso(personajeEntity.getPeso());
-        personaje.setHistoria(personajeEntity.getHistoria());
-        personaje.setDeleted(Boolean.FALSE);
-        int valorHashEntity = personajeEntity.hashCode();
-        int valorHashEntityNueva = personaje .hashCode();
-        entity.getPersonajes().remove(personaje);
-        PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
-        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
-        return result;
-    }*/
-
-
-
-
 
     @Override
     public void delete(Long id) {
-        Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
-        if (!entity.isPresent()){
-            throw new ParamNotFound("id de pelicula no encontrado");
-        }
+        PeliculaEntity entity = peliculaRepository.findById(id).orElseThrow(
+                ()->new ParamNotFound("ID de pelicula invalido :("));
         this.peliculaRepository.deleteById(id);
 
     }

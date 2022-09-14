@@ -15,6 +15,6 @@ import java.util.Set;
 public class PersonajeFiltersDTO {
     private String nombre;
     private Long edad;
-    private Long peso;
+    //private Double peso;
     private Set<Long> peliculas;
 }

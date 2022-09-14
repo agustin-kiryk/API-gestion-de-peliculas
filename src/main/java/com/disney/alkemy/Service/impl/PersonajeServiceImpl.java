@@ -19,9 +19,6 @@ import java.util.Set;
 
 @Service
 public class PersonajeServiceImpl implements PersonajeService {
-
-
-
     @Autowired
     private PersonajeRepository personajeRepository;
     @Autowired
@@ -31,43 +28,23 @@ public class PersonajeServiceImpl implements PersonajeService {
     @Autowired
     PeliculaRepository peliculaRepository;
 
-
-
-
     @Override
      public PersonajeDTO save(PersonajeDTO dto) {
         PersonajeEntity entity = personajeMapper.personajeDTO2Entity(dto);
         PersonajeEntity entitySaved = personajeRepository.save(entity);
         PersonajeDTO result = personajeMapper.personajeEntity2DTO(entitySaved, true);
-
         return result;
     }
-
-
-
-
     @Override
     public List<PersonajeDTO> getAllpersonajes() {
         List<PersonajeEntity> entities = personajeRepository.findAll();
         List<PersonajeDTO> result = personajeMapper.personajeEntitySet2DTOList(entities,true);
         return result;
     }
-
     @Override
     public PersonajeEntity getEntityById(Long idPersonaje) {
         return null;
     }
-
-    /**  @Override
-    public PersonajeEntity getEntityById(Long idPersonaje) {
-        Optional<PersonajeEntity> entity = personajeRepository.findById(id);
-        if (!entity.isPresent()) {
-            throw new ParamNotFound("id de personaje invalido");
-        }
-        PersonajeEntity result = entity.get();
-        return result;
-
-    }**/
 
     @Override
     public PersonajeDTO getDetailsById(Long id) {
@@ -77,10 +54,7 @@ public class PersonajeServiceImpl implements PersonajeService {
         }
         PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(entity.get(), true);
         return personajeDTO;
-
-
     }
-
     @Override
     public PersonajeDTO update(Long id, PersonajeDTO personaje) {
             Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
@@ -92,17 +66,13 @@ public class PersonajeServiceImpl implements PersonajeService {
         PersonajeDTO result = personajeMapper.personajeEntity2DTO(updatedEntity, true);
         return result;
     }
-
-
     @Override
-    public List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Long peso, Set<Long> peliculas) {
-        PersonajeFiltersDTO filtersDTO = new PersonajeFiltersDTO(nombre, edad, peso, peliculas);
+    public List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Set<Long> peliculas) {
+        PersonajeFiltersDTO filtersDTO = new PersonajeFiltersDTO(nombre, edad, peliculas);
         List<PersonajeEntity> entities = this.personajeRepository.findAll(this.personajeSpecif.getByFilters(filtersDTO));
-        List<PersonajeAuxDTO> dtos = this.personajeMapper.personajeEntitySet2AuxDTOList(entities/*,true*/);
+        List<PersonajeAuxDTO> dtos = this.personajeMapper.personajeEntitySet2AuxDTOList(entities);
         return dtos;
     }
-
-
     @Override
     public void delete(Long id) {
         Optional<PersonajeEntity> entity = personajeRepository.findById(id);

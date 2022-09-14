@@ -30,14 +30,14 @@ public class PersonajeSpecif {
 
             if (filtersDTO.getEdad() != null) {
                 predicates.add(
-                        criteriaBuilder.equal(root.<Integer>get("edad"), "%" + filtersDTO.getEdad()+ "%")
+                        criteriaBuilder.equal(root.<Integer>get("edad"), filtersDTO.getEdad() )
                 );
             }
-            if (filtersDTO.getPeso() != null) {
+           /* if (filtersDTO.getPeso() != null) {
                 predicates.add(
                         criteriaBuilder.equal(root.<Integer>get("peso"), "%"+filtersDTO.getPeso()+ "%")
                 );
-            }
+            }*/
 
 
             if (!CollectionUtils.isEmpty(filtersDTO.getPeliculas())) {

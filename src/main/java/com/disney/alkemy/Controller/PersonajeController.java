@@ -29,23 +29,23 @@ public class PersonajeController {
         PersonajeDTO personajeSaved = personajeService.save(personaje);
         return ResponseEntity.status(HttpStatus.CREATED).body(personajeSaved);
     }
-    @GetMapping("/")
+    /*@GetMapping("/")
     public ResponseEntity<List<PersonajeDTO>> getAll(){
         List<PersonajeDTO> personajes = personajeService.getAllpersonajes();
         return ResponseEntity.ok().body(personajes);
-    }
+    }*/
     @GetMapping("/{id}")
     public ResponseEntity<PersonajeDTO> getDetailsById(@Valid @PathVariable Long id) {
         PersonajeDTO personaje = this.personajeService.getDetailsById(id);
         return ResponseEntity.ok(personaje);
     }
     @GetMapping ResponseEntity<List<PersonajeAuxDTO>> getByFilters(
-           @Valid @RequestParam(required = false) String nombre,
-           @Valid @RequestParam(required = false) Long edad,
-           @Valid @RequestParam(required = false) Long peso,
-           @Valid @RequestParam(required = false) Set<Long> peliculas
+           @Valid @RequestParam(value = "name",required = false) String nombre,
+          @Valid @RequestParam(value = "age",required = false) Long edad,
+           //@Valid @RequestParam(required = false) Double peso,
+           @Valid @RequestParam(value = "movies",required = false) Set<Long> peliculas
     ){
-        List<PersonajeAuxDTO> personajes = this.personajeService.getByFilters(nombre, edad, peso, peliculas);
+        List<PersonajeAuxDTO> personajes = this.personajeService.getByFilters(nombre, edad, peliculas);
         return ResponseEntity.ok(personajes);
     }
 
