@@ -42,11 +42,6 @@ public class PersonajeServiceImpl implements PersonajeService {
         return result;
     }
     @Override
-    public PersonajeEntity getEntityById(Long idPersonaje) {
-        return null;
-    }
-
-    @Override
     public PersonajeDTO getDetailsById(Long id) {
         Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
         if (!entity.isPresent()) {
@@ -75,10 +70,8 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
     @Override
     public void delete(Long id) {
-        Optional<PersonajeEntity> entity = personajeRepository.findById(id);
-        if (!entity.isPresent()){
-            throw new ParamNotFound("no se encontro ID de personaje");
-        }
+        PersonajeEntity entity = personajeRepository.findById(id).orElseThrow(
+                ()-> new ParamNotFound("no se encuentra el id de personaje"));
         this.personajeRepository.deleteById(id);
     }
 }

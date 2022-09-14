@@ -21,16 +21,12 @@ public class PersonajeMapper {
     @Autowired
     PeliculaRepository peliculaRepository;
 
-
     public void personajeEntityRefreshValues(PersonajeEntity entity, PersonajeDTO dto) {
         entity.setImagen(dto.getImagen());
         entity.setNombre(dto.getNombre());
-        entity.setEdad(dto.getEdad());//peso historia
+        entity.setEdad(dto.getEdad());
         entity.setPeso(dto.getPeso());
         entity.setHistoria(dto.getHistoria());
-
-
-
     }
 
     public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto) {
@@ -42,7 +38,6 @@ public class PersonajeMapper {
         entity.setHistoria(dto.getHistoria());
         return entity;
     }
-
     public PersonajeDTO personajeEntity2DTO(PersonajeEntity entity, boolean loadPeliculas) {
         PersonajeDTO dto = new PersonajeDTO();
         dto.setId(entity.getId());
@@ -57,16 +52,13 @@ public class PersonajeMapper {
         }
         return dto;
     }
-
     public Set<PersonajeEntity> personajeDTOList2Entity(List<PersonajeDTO> dtos) {
         Set<PersonajeEntity> entities = new HashSet<>();
         for (PersonajeDTO dto : dtos) {
             entities.add(this.personajeDTO2Entity(dto));
         }
-
         return entities;
     }
-
 
     public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<PersonajeEntity> entities, boolean loadPeliculas) {
         List<PersonajeDTO> dtos = new ArrayList<>();
@@ -89,7 +81,5 @@ public class PersonajeMapper {
         dto.setImagen(entity.getImagen());
         return dto;
     }
-
-
 
 }

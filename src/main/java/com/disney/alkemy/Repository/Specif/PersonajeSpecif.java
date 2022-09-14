@@ -16,15 +16,12 @@ import java.util.List;
 public class PersonajeSpecif {
     public Specification<PersonajeEntity> getByFilters(PersonajeFiltersDTO filtersDTO) {
         return (root, query, criteriaBuilder) -> {
-
             List<Predicate> predicates = new ArrayList<>();
-
             if (StringUtils.hasLength(filtersDTO.getNombre())) {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("nombre")),
                                 "%" + filtersDTO.getNombre().toLowerCase() + "%")
-
                 );
             }
 
@@ -33,12 +30,6 @@ public class PersonajeSpecif {
                         criteriaBuilder.equal(root.<Integer>get("edad"), filtersDTO.getEdad() )
                 );
             }
-           /* if (filtersDTO.getPeso() != null) {
-                predicates.add(
-                        criteriaBuilder.equal(root.<Integer>get("peso"), "%"+filtersDTO.getPeso()+ "%")
-                );
-            }*/
-
 
             if (!CollectionUtils.isEmpty(filtersDTO.getPeliculas())) {
                 Join<PeliculaEntity, PersonajeEntity> join = root.join("peliculas", JoinType.INNER);
@@ -46,7 +37,7 @@ public class PersonajeSpecif {
                 predicates.add(peliculasId.in(filtersDTO.getPeliculas()));
             }
 
-            //remove duplicates
+            //Remover Duplicados
             query.distinct(true);
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

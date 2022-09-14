@@ -40,7 +40,8 @@ public class PeliculaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PeliculaDTO> update (@Valid @PathVariable Long id, @RequestBody PeliculaDTO pelicula) {
+    public ResponseEntity<PeliculaDTO> update (
+            @Valid @PathVariable Long id, @RequestBody PeliculaDTO pelicula) {
         PeliculaDTO result = this.peliculaService.update(id, pelicula);
         return ResponseEntity.ok(result);
     }
@@ -53,11 +54,12 @@ public class PeliculaController {
     }
 
     @PostMapping("/{id}/characters/{idPersonaje}")
-    public ResponseEntity<Void> add(
+        public ResponseEntity<PeliculaDTO> add(
           @Valid @PathVariable("id") Long id,
           @Valid @PathVariable("idPersonaje") Long idPersonaje){
         this.peliculaService.addPersonaje(id, idPersonaje);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        PeliculaDTO dto = this.peliculaService.addPersonaje(id,idPersonaje);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @DeleteMapping("/{id}/characters/{idPersonaje}")

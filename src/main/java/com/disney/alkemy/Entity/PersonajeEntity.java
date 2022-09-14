@@ -26,8 +26,8 @@ public class PersonajeEntity {
     private Double peso;
     private String historia;
 
-    // Creo personajes solamente sin asignar peliculas ni genero
-    @ManyToMany(mappedBy = "personajes") // TODO: SAQUE CASCADA
+
+    @ManyToMany(mappedBy = "personajes")
     private List<PeliculaEntity> peliculas = new ArrayList<>();
 
     private boolean deleted = Boolean.FALSE;
@@ -38,7 +38,6 @@ public class PersonajeEntity {
         }
         if (!(obj instanceof PersonajeEntity)) {
             return false;
-
         } else {
             PersonajeEntity personajeEntity = (PersonajeEntity) obj;
             if (this.getId()!=null) {
@@ -47,14 +46,8 @@ public class PersonajeEntity {
             } else {
                 return false;
             }
-
         }
     }
-
-   /* @Override
-    public int hashCode(){
-        return Objects.hash(id,imagen,nombre);
-    }*/
 }
 
 

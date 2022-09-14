@@ -17,7 +17,6 @@ public interface PersonajeService {
 
     List<PersonajeDTO> getAllpersonajes();
 
-    PersonajeEntity getEntityById(Long idPersonaje);
 
     PersonajeDTO getDetailsById(Long id);
 

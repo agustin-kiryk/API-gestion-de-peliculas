@@ -9,7 +9,6 @@ import com.disney.alkemy.Repository.GeneroRepository;
 import com.disney.alkemy.Repository.PeliculaRepository;
 import com.disney.alkemy.Repository.PersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -23,19 +22,14 @@ import java.util.Set;
 public class PeliculaMapper {
     @Autowired
     private PersonajeMapper personajeMapper;
-   /** @Autowired  //TODO: SACO @LAZY DE atributos en clase peliculamapper
-    public PeliculaMapper( PersonajeMapper personajeMapper) {
-
-        this.personajeMapper = personajeMapper;
-    }**/
-   @Autowired
-   private PersonajeRepository personajeRepository;
-   @Autowired
-   private PeliculaRepository peliculaRepository;
-   @Autowired
-   private GeneroMapper generoMapper;
-   @Autowired
-   private GeneroRepository generoRepository;
+    @Autowired
+    private PersonajeRepository personajeRepository;
+    @Autowired
+    private PeliculaRepository peliculaRepository;
+    @Autowired
+    private GeneroMapper generoMapper;
+    @Autowired
+    private GeneroRepository generoRepository;
     private LocalDate stringToLocalDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(stringDate, formatter);
@@ -56,7 +50,7 @@ public class PeliculaMapper {
         peliculaEntity.setFechaCreacion(this.stringToLocalDate(dto.getFechaCreacion()));
         peliculaEntity.setCalificacion(dto.getCalificacion());
         peliculaEntity.setGeneroId(dto.getGeneroId());
-        Set<PersonajeEntity>personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
+        Set<PersonajeEntity> personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
         peliculaEntity.setPersonajes(personajes);
         return peliculaEntity;
     }
@@ -69,7 +63,7 @@ public class PeliculaMapper {
         dto.setFechaCreacion(entity.getFechaCreacion().toString());
         dto.setCalificacion(entity.getCalificacion());
         dto.setGeneroId(entity.getGeneroId());
-        if(loadPersonajes) {
+        if (loadPersonajes) {
             List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(entity.getPersonajes(), false);
             dto.setPersonajes(personajeDTOS);
         }

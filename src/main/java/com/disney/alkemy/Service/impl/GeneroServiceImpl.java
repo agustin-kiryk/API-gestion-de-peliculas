@@ -6,9 +6,7 @@ import com.disney.alkemy.Repository.GeneroRepository;
 import com.disney.alkemy.Service.GeneroService;
 import com.disney.alkemy.exceptions.ParamNotFound;
 import com.disney.alkemy.mapper.GeneroMapper;
-import org.hibernate.annotations.SQLDelete;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,46 +19,33 @@ private GeneroMapper generoMapper;
 @Autowired
  private    GeneroRepository generoRepository;
 
-
     public GeneroDTO save(GeneroDTO dto){
-        GeneroEntity entity = generoMapper.generodto2Entity(dto); //convierto a entity
-        GeneroEntity entitySaved = generoRepository.save(entity);    //guardardo
-        GeneroDTO result = generoMapper.generoEntity2DTO(entitySaved);//convierto a DTO
+        GeneroEntity entity = generoMapper.generodto2Entity(dto);
+        GeneroEntity entitySaved = generoRepository.save(entity);
+        GeneroDTO result = generoMapper.generoEntity2DTO(entitySaved);
 
         return result; //devuelvo DTO
 
     }
-
-
     @Override
     public List<GeneroDTO> getAllgeneros() {
         List<GeneroEntity> entities = generoRepository.findAll();
         List<GeneroDTO> result = generoMapper.generoEntityList2DTOList(entities);
         return result;
     }
-
     @Override
     public GeneroDTO getDetailsById(Long id) {
-        Optional<GeneroEntity> entity = (generoRepository.findById(id));
-        if (entity.isEmpty()){
-            throw new ParamNotFound("El ID de Genero no existe");
-        }
-        GeneroDTO generoDTO = generoMapper.generoEntity2DTO(entity.get());
+        GeneroEntity entity = (generoRepository.findById(id)).orElseThrow(
+                ()-> new ParamNotFound("El ID de genero no existe"));
+        GeneroDTO generoDTO = generoMapper.generoEntity2DTO(entity);
         return generoDTO;
-
     }
-
     @Override
     public void delete(Long id) {
-        Optional<GeneroEntity> entity = generoRepository.findById(id);
-        if (!entity.isPresent()){
-            throw new ParamNotFound("No se encontro erl ID del Genero");
-        }
+        GeneroEntity entity = generoRepository.findById(id).orElseThrow(
+                ()-> new ParamNotFound("no se encuentra el ID del Genero"));
         this.generoRepository.deleteById(id);
     }
-
-
-
     @Override
     public GeneroDTO update(Long id, GeneroDTO genero) {
         Optional<GeneroEntity> oldEntity = Optional.of(generoRepository.getReferenceById(id));
@@ -70,6 +55,5 @@ private GeneroMapper generoMapper;
         GeneroDTO result = generoMapper.generoEntity2DTO(entitySaved);
         return result;
     }
-
 
 }

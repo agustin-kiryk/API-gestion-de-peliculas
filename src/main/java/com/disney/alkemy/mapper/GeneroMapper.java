@@ -21,8 +21,6 @@ public class GeneroMapper {
          dto.setNombre(entity.getNombre());
          dto.setImagen(entity.getImagen());
          return dto;
-
-
     }
 
     public List<GeneroDTO> generoEntityList2DTOList (List<GeneroEntity> entities){
@@ -32,6 +30,5 @@ public class GeneroMapper {
         }
         return dtos;
     }
-
 
 }

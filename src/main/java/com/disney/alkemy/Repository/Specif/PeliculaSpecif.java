@@ -34,7 +34,7 @@ public class PeliculaSpecif {
                 );
             }
 
-            //remove duplicates
+            //remueve duplicados
             query.distinct(true);
 
             //order resolver
@@ -43,7 +43,6 @@ public class PeliculaSpecif {
                     filtersDTO.isAsc() ?
                             criteriaBuilder.asc(root.get(orderByField)) :
                             criteriaBuilder.desc(root.get(orderByField))
-
             );
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

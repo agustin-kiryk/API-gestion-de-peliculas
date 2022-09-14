@@ -17,14 +17,10 @@ import java.io.IOException;
 
 @Service
 public class EmailServiceImpl implements EmailService {
-
         @Autowired
         private Environment env;
-
-
         @Value("${alkemy.disney.email.sender}")
         private String emailSender;
-
 
         public void sendWelcomeEmailTo(String to){
             String apiKey = env.getProperty("EMAIL_API_KEY");
