@@ -30,11 +30,13 @@ public class PeliculaMapper {
     private GeneroMapper generoMapper;
     @Autowired
     private GeneroRepository generoRepository;
+
     private LocalDate stringToLocalDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(stringDate, formatter);
         return date;
     }
+
     public void peliculaEntityRefreshValues(PeliculaEntity entity, PeliculaDTO dto) {
         entity.setImagen(dto.getImagen());
         entity.setTitulo(dto.getTitulo());
@@ -92,7 +94,7 @@ public class PeliculaMapper {
         PeliculaAuxDTO auxDTO;
         for (PeliculaEntity entity : entities) {
             auxDTO = new PeliculaAuxDTO();
-          //  auxDTO.setId(entity.getId());
+            //  auxDTO.setId(entity.getId());
             auxDTO.setImagen(entity.getImagen());
             auxDTO.setTitulo(entity.getTitulo());
             auxDTO.setFechaCreacion(entity.getFechaCreacion().toString());

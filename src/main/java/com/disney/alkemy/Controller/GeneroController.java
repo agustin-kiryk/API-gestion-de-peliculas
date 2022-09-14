@@ -18,14 +18,8 @@ import java.util.List;
 @RequestMapping("generos")
 public class GeneroController {
 
-    /*   @RequestMapping(value = "prueba1")
-    public List<String> prueba() {
-        return List.of("manzana", "kiwi", "banana");
-    }    */
     @Autowired
     private GeneroService generoService;
-
-    //Traer Generos//
 
     @GetMapping
     public ResponseEntity<List<GeneroDTO>> getAll(){
@@ -33,13 +27,11 @@ public class GeneroController {
         return ResponseEntity.ok().body(generos);
 
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<GeneroDTO> getDetailsById (@Valid @PathVariable Long id) {
         GeneroDTO genero = generoService.getDetailsById(id);
         return ResponseEntity.ok(genero);
     }
-
 
     /*guardar genero*/
     @PostMapping

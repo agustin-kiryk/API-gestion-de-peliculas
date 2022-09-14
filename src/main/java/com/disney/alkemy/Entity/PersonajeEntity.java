@@ -31,6 +31,7 @@ public class PersonajeEntity {
     private List<PeliculaEntity> peliculas = new ArrayList<>();
 
     private boolean deleted = Boolean.FALSE;
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -40,7 +41,7 @@ public class PersonajeEntity {
             return false;
         } else {
             PersonajeEntity personajeEntity = (PersonajeEntity) obj;
-            if (this.getId()!=null) {
+            if (this.getId() != null) {
                 return this.getId().equals(personajeEntity.getId());
 
             } else {

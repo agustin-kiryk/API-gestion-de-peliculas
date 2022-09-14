@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 @Component
 public class PeliculaSpecif {
-    public Specification <PeliculaEntity> getByFilters(PeliculaFiltersDTO filtersDTO) {
+    public Specification<PeliculaEntity> getByFilters(PeliculaFiltersDTO filtersDTO) {
         return (root, query, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
@@ -37,16 +37,17 @@ public class PeliculaSpecif {
             //remueve duplicados
             query.distinct(true);
 
-            //order resolver
+            //resolver orden
             String orderByField = "fechaCreacion";
             query.orderBy(
                     filtersDTO.isAsc() ?
                             criteriaBuilder.asc(root.get(orderByField)) :
                             criteriaBuilder.desc(root.get(orderByField))
-            );
 
+            );
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
-    }}
+    }
+}
 
 

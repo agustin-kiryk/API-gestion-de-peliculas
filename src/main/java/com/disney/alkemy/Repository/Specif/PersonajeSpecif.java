@@ -12,6 +12,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class PersonajeSpecif {
     public Specification<PersonajeEntity> getByFilters(PersonajeFiltersDTO filtersDTO) {
@@ -27,7 +28,7 @@ public class PersonajeSpecif {
 
             if (filtersDTO.getEdad() != null) {
                 predicates.add(
-                        criteriaBuilder.equal(root.<Integer>get("edad"), filtersDTO.getEdad() )
+                        criteriaBuilder.equal(root.<Integer>get("edad"), filtersDTO.getEdad())
                 );
             }
 
@@ -42,7 +43,8 @@ public class PersonajeSpecif {
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
-    }}
+    }
+}
 
 
 

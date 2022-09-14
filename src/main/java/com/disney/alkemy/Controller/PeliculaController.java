@@ -21,8 +21,6 @@ public class PeliculaController {
     PeliculaController(PeliculaService peliculaService) {
         this.peliculaService = peliculaService;
     }
-
-
     @GetMapping("/{id}")
     public ResponseEntity<PeliculaDTO> getDetailsById(@Valid @PathVariable Long id) {
         PeliculaDTO pelicula = this.peliculaService.getDetailsById(id);

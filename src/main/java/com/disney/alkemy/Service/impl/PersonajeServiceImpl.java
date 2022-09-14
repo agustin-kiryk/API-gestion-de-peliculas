@@ -29,18 +29,20 @@ public class PersonajeServiceImpl implements PersonajeService {
     PeliculaRepository peliculaRepository;
 
     @Override
-     public PersonajeDTO save(PersonajeDTO dto) {
+    public PersonajeDTO save(PersonajeDTO dto) {
         PersonajeEntity entity = personajeMapper.personajeDTO2Entity(dto);
         PersonajeEntity entitySaved = personajeRepository.save(entity);
         PersonajeDTO result = personajeMapper.personajeEntity2DTO(entitySaved, true);
         return result;
     }
+
     @Override
     public List<PersonajeDTO> getAllpersonajes() {
         List<PersonajeEntity> entities = personajeRepository.findAll();
-        List<PersonajeDTO> result = personajeMapper.personajeEntitySet2DTOList(entities,true);
+        List<PersonajeDTO> result = personajeMapper.personajeEntitySet2DTOList(entities, true);
         return result;
     }
+
     @Override
     public PersonajeDTO getDetailsById(Long id) {
         Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
@@ -50,17 +52,19 @@ public class PersonajeServiceImpl implements PersonajeService {
         PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(entity.get(), true);
         return personajeDTO;
     }
+
     @Override
     public PersonajeDTO update(Long id, PersonajeDTO personaje) {
-            Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
-            if (!entity.isPresent()) {
-                throw new ParamNotFound("id de personaje invalido");
-            }
+        Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
+        if (!entity.isPresent()) {
+            throw new ParamNotFound("id de personaje invalido");
+        }
         this.personajeMapper.personajeEntityRefreshValues(entity.get(), personaje);
-        PersonajeEntity updatedEntity= this.personajeRepository.save(entity.get());
+        PersonajeEntity updatedEntity = this.personajeRepository.save(entity.get());
         PersonajeDTO result = personajeMapper.personajeEntity2DTO(updatedEntity, true);
         return result;
     }
+
     @Override
     public List<PersonajeAuxDTO> getByFilters(String nombre, Long edad, Set<Long> peliculas) {
         PersonajeFiltersDTO filtersDTO = new PersonajeFiltersDTO(nombre, edad, peliculas);
@@ -68,10 +72,11 @@ public class PersonajeServiceImpl implements PersonajeService {
         List<PersonajeAuxDTO> dtos = this.personajeMapper.personajeEntitySet2AuxDTOList(entities);
         return dtos;
     }
+
     @Override
     public void delete(Long id) {
         PersonajeEntity entity = personajeRepository.findById(id).orElseThrow(
-                ()-> new ParamNotFound("no se encuentra el id de personaje"));
+                () -> new ParamNotFound("no se encuentra el id de personaje"));
         this.personajeRepository.deleteById(id);
     }
 }

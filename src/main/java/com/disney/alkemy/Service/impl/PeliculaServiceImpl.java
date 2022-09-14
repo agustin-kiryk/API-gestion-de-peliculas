@@ -34,20 +34,20 @@ public class PeliculaServiceImpl implements PeliculaService {
     private PersonajeRepository personajeRepository;
 
 
-   /* @Autowired
-    public PeliculaServiceImpl(
-            PeliculaRepository peliculaRepository,
-            PeliculaSpecif peliculaSpecif,
-            PeliculaMapper peliculaMapper,
-            PersonajeService personajeService,
-          PersonajeRepository personajeRepository
-    ) {
-        this.peliculaRepository = peliculaRepository;
-        this.peliculaSpecif = peliculaSpecif;
-        this.peliculaMapper = peliculaMapper;
-        this.personajeService = personajeService;
-        this.personajeRepository = personajeRepository;
-    }*/
+    /* @Autowired
+     public PeliculaServiceImpl(
+             PeliculaRepository peliculaRepository,
+             PeliculaSpecif peliculaSpecif,
+             PeliculaMapper peliculaMapper,
+             PersonajeService personajeService,
+           PersonajeRepository personajeRepository
+     ) {
+         this.peliculaRepository = peliculaRepository;
+         this.peliculaSpecif = peliculaSpecif;
+         this.peliculaMapper = peliculaMapper;
+         this.personajeService = personajeService;
+         this.personajeRepository = personajeRepository;
+     }*/
     @Override
     public List<PeliculaAuxDTO> getAll() {
         List<PeliculaEntity> entities = peliculaRepository.findAll();
@@ -58,7 +58,7 @@ public class PeliculaServiceImpl implements PeliculaService {
     @Override
     public PeliculaDTO getDetailsById(Long id) {
         PeliculaEntity entity = peliculaRepository.findById(id).orElseThrow(
-                ()->new ParamNotFound("no se encuentra el id de pelicula"));
+                () -> new ParamNotFound("no se encuentra el id de pelicula"));
         PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(entity, true);
         return peliculaDTO;
     }
@@ -71,6 +71,7 @@ public class PeliculaServiceImpl implements PeliculaService {
         return dtos;
 
     }
+
     @Override
     public PeliculaDTO update(Long id, PeliculaDTO pelicula) {
         Optional<PeliculaEntity> entity = this.peliculaRepository.findById(id);
@@ -82,6 +83,7 @@ public class PeliculaServiceImpl implements PeliculaService {
         PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(updatedEntity, true);
         return result;
     }
+
     @Override
     public PeliculaDTO save(PeliculaDTO pelicula) {
 
@@ -90,36 +92,38 @@ public class PeliculaServiceImpl implements PeliculaService {
         PeliculaDTO result = peliculaMapper.peliculaEntity2DTO(entitySaved, true);
         return result;
     }
+
     @Override
     public PeliculaDTO addPersonaje(Long id, Long idPersonaje) {
 
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
-                ()->new ParamNotFound("no se encuentra el id de pelicula"));
+                () -> new ParamNotFound("no se encuentra el id de pelicula"));
         PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
-                ()->new ParamNotFound("no se encuentra el id de personaje"));
+                () -> new ParamNotFound("no se encuentra el id de personaje"));
         entity.addPersonaje(personajeEntity);
-      PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
-      PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitysaved,true);
-      return result;
+        PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
+        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
+        return result;
     }
 
     @Override
     public PeliculaDTO removePersonaje(Long id, Long idPersonaje) {
 
         PeliculaEntity entity = this.peliculaRepository.findById(id).orElseThrow(
-                ()->new ParamNotFound("no se encuentra el id de pelicula"));
+                () -> new ParamNotFound("no se encuentra el id de pelicula"));
         PersonajeEntity personajeEntity = this.personajeRepository.findById(idPersonaje).orElseThrow(
-                ()-> new ParamNotFound("no se encuentra el id de personaje"));
+                () -> new ParamNotFound("no se encuentra el id de personaje"));
         entity.removePersonaje(personajeEntity);
         PeliculaEntity entitysaved = this.peliculaRepository.save(entity);
-        PeliculaDTO result= this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
+        PeliculaDTO result = this.peliculaMapper.peliculaEntity2DTO(entitysaved, true);
 
         return result;
     }
+
     @Override
     public void delete(Long id) {
         PeliculaEntity entity = peliculaRepository.findById(id).orElseThrow(
-                ()->new ParamNotFound("ID de pelicula invalido :("));
+                () -> new ParamNotFound("ID de pelicula invalido :("));
         this.peliculaRepository.deleteById(id);
 
     }

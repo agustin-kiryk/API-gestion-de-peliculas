@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PeliculaAuxDTO {
 
-    //private Long id;
     private String imagen;
     private String titulo;
     private String fechaCreacion;

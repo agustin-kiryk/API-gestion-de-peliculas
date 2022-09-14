@@ -26,12 +26,9 @@ public class UserAuthController {
         service.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> signIn(@Valid @RequestBody AuthenticationRequest request) throws Exception {
         AuthenticationResponse response = service.authenticate(request);
         return ResponseEntity.ok(response);
-
     }
-
 }

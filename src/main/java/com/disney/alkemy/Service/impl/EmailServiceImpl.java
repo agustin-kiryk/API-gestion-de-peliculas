@@ -17,35 +17,34 @@ import java.io.IOException;
 
 @Service
 public class EmailServiceImpl implements EmailService {
-        @Autowired
-        private Environment env;
-        @Value("${alkemy.disney.email.sender}")
-        private String emailSender;
+    @Autowired
+    private Environment env;
+    @Value("${alkemy.disney.email.sender}")
+    private String emailSender;
 
-        public void sendWelcomeEmailTo(String to){
-            String apiKey = env.getProperty("EMAIL_API_KEY");
+    public void sendWelcomeEmailTo(String to) {
+        String apiKey = env.getProperty("EMAIL_API_KEY");
 
-            Email fromEmail = new Email(emailSender);
-            Email toEmail = new Email(to);
-            Content content = new Content("text/plain", "Bienvenido al portal de peliculas! :) " );
-            String subject = "Te registraste correctamente :) !";
+        Email fromEmail = new Email(emailSender);
+        Email toEmail = new Email(to);
+        Content content = new Content("text/plain", "Bienvenido al portal de peliculas! :) ");
+        String subject = "Te registraste correctamente :) !";
 
-            Mail mail = new Mail(fromEmail, subject, toEmail, content);
-            SendGrid sg = new SendGrid(apiKey);
-            Request request = new Request();
+        Mail mail = new Mail(fromEmail, subject, toEmail, content);
+        SendGrid sg = new SendGrid(apiKey);
+        Request request = new Request();
 
-            try{
-                request.setMethod(Method.POST);
-                request.setEndpoint("mail/send");
-                request.setBody(mail.build());
-                Response response = sg.api(request);
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
 
-            }
-            catch (IOException e){
-                System.out.println("Error al intentar enviar el correo electrónico");
-            }
+        } catch (IOException e) {
+            System.out.println("Error al intentar enviar el correo electrónico");
         }
-
-
     }
+
+
+}
 

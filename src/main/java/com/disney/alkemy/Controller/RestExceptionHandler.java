@@ -22,15 +22,14 @@ import java.util.List;
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {Throwable.class})
-    protected  ResponseEntity<Object> handleThrowable (Throwable ex, WebRequest request){
+    protected ResponseEntity<Object> handleThrowable(Throwable ex, WebRequest request) {
         ApiErrorDTO errorDTO = new ApiErrorDTO(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 ex.getMessage(),
                 Arrays.asList("")
         );
-        return  handleExceptionInternal((Exception) ex, errorDTO, new HttpHeaders(),HttpStatus.BAD_REQUEST,request );
+        return handleExceptionInternal((Exception) ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-
 
     @ExceptionHandler(value = {ParamNotFound.class})
     protected ResponseEntity<Object> handleParamNotFound(RuntimeException ex, WebRequest request) {
@@ -47,6 +46,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String bodyOfResponse = "Esto debe ser específico de la aplicación";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
+
     @ExceptionHandler(value = {BadCredentialsException.class})
     protected ResponseEntity<Object> handleBadCredentialsException(RuntimeException ex, WebRequest request) {
         ApiErrorDTO errorDTO = new ApiErrorDTO(
@@ -56,6 +56,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         );
         return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity handleUsernameNotFoundException(final UsernameNotFoundException ex, WebRequest request) {
         ApiErrorDTO errorDTO = new ApiErrorDTO(
@@ -63,9 +64,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 ex.getMessage(),
                 Arrays.asList("UsernameNotFoundException")
         );
-        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request );
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -74,10 +74,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
         List<String> errors = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()){
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ": " + error.getDefaultMessage());
         }
-        for (ObjectError error : ex.getBindingResult().getGlobalErrors()){
+        for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
         }
         ApiErrorDTO apiError = new ApiErrorDTO(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);

@@ -14,12 +14,12 @@ import java.util.Optional;
 
 @Service
 public class GeneroServiceImpl implements GeneroService {
-@Autowired
-private GeneroMapper generoMapper;
-@Autowired
- private    GeneroRepository generoRepository;
+    @Autowired
+    private GeneroMapper generoMapper;
+    @Autowired
+    private GeneroRepository generoRepository;
 
-    public GeneroDTO save(GeneroDTO dto){
+    public GeneroDTO save(GeneroDTO dto) {
         GeneroEntity entity = generoMapper.generodto2Entity(dto);
         GeneroEntity entitySaved = generoRepository.save(entity);
         GeneroDTO result = generoMapper.generoEntity2DTO(entitySaved);
@@ -27,25 +27,29 @@ private GeneroMapper generoMapper;
         return result; //devuelvo DTO
 
     }
+
     @Override
     public List<GeneroDTO> getAllgeneros() {
         List<GeneroEntity> entities = generoRepository.findAll();
         List<GeneroDTO> result = generoMapper.generoEntityList2DTOList(entities);
         return result;
     }
+
     @Override
     public GeneroDTO getDetailsById(Long id) {
         GeneroEntity entity = (generoRepository.findById(id)).orElseThrow(
-                ()-> new ParamNotFound("El ID de genero no existe"));
+                () -> new ParamNotFound("El ID de genero no existe"));
         GeneroDTO generoDTO = generoMapper.generoEntity2DTO(entity);
         return generoDTO;
     }
+
     @Override
     public void delete(Long id) {
         GeneroEntity entity = generoRepository.findById(id).orElseThrow(
-                ()-> new ParamNotFound("no se encuentra el ID del Genero"));
+                () -> new ParamNotFound("no se encuentra el ID del Genero"));
         this.generoRepository.deleteById(id);
     }
+
     @Override
     public GeneroDTO update(Long id, GeneroDTO genero) {
         Optional<GeneroEntity> oldEntity = Optional.of(generoRepository.getReferenceById(id));

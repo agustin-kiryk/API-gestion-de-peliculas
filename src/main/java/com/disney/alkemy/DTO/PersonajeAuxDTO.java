@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonajeAuxDTO {
-    //private Long id;
+
     private String imagen;
     private String nombre;
 }

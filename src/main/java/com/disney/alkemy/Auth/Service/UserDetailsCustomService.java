@@ -23,26 +23,16 @@ import java.util.Collections;
 
 @Service
 public class UserDetailsCustomService implements UserDetailsService {
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private EmailService emailService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private JwtUtils jwtUtils;
-
-
-
-
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUsername(username);
@@ -64,11 +54,8 @@ public class UserDetailsCustomService implements UserDetailsService {
         emailService.sendWelcomeEmailTo(userEntity.getUsername());
         return true;
     }
-
     public AuthenticationResponse authenticate(AuthenticationRequest request) throws Exception {
-
         UserDetails userDetails;
-
         try {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())

@@ -33,12 +33,12 @@ public class PeliculaEntity {
 
     private Long Calificacion;
 
-    @ManyToOne(fetch = FetchType.EAGER) // TODO : SACO CASCADA
+    @ManyToOne(fetch = FetchType.EAGER)
 
     @JoinColumn(name = "genero_id", insertable = false, updatable = false )
     private GeneroEntity genero;
 
-        //TODO: VER NULLABLE POR SI QUIERO AGREGAR PELI SIN GENERO
+
     @Column(name= "genero_id", nullable = false)
     private Long generoId;
 
