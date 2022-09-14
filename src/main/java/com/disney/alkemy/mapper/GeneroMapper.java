@@ -1,7 +1,7 @@
 package com.disney.alkemy.mapper;
 
-import com.disney.alkemy.DTO.GeneroDTO;
-import com.disney.alkemy.Entity.GeneroEntity;
+import com.disney.alkemy.dto.GeneroDTO;
+import com.disney.alkemy.entity.GeneroEntity;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;

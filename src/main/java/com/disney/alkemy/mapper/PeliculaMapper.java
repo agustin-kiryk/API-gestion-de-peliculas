@@ -1,13 +1,13 @@
 package com.disney.alkemy.mapper;
 
-import com.disney.alkemy.DTO.PeliculaAuxDTO;
-import com.disney.alkemy.DTO.PeliculaDTO;
-import com.disney.alkemy.DTO.PersonajeDTO;
-import com.disney.alkemy.Entity.PeliculaEntity;
-import com.disney.alkemy.Entity.PersonajeEntity;
-import com.disney.alkemy.Repository.GeneroRepository;
-import com.disney.alkemy.Repository.PeliculaRepository;
-import com.disney.alkemy.Repository.PersonajeRepository;
+import com.disney.alkemy.dto.PeliculaAuxDTO;
+import com.disney.alkemy.dto.PeliculaDTO;
+import com.disney.alkemy.dto.PersonajeDTO;
+import com.disney.alkemy.entity.PeliculaEntity;
+import com.disney.alkemy.entity.PersonajeEntity;
+import com.disney.alkemy.repository.GeneroRepository;
+import com.disney.alkemy.repository.PeliculaRepository;
+import com.disney.alkemy.repository.PersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
