@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("generos")
+@RequestMapping("genre")
 public class GeneroController {
 
     @Autowired
