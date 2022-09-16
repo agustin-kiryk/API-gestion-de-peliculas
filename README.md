@@ -44,7 +44,7 @@ _Vea el siguiente ejemplo:_
 
 ![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/registro11.png?raw=true)
 
-### Iniciar secion ✅
+### Iniciar sesion ✅
 _Una vez registrado, para iniciar secion se debe ingresar el nombre de usuario y contraseña. El sistema brindará un token JWT que tendra un tiempo de expiración, el cual puede ser configurado desde el metodo **createtoken**, ubicado en :_
 ```
 auth/Service/JwtUtils.java
