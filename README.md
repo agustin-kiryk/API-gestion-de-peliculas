@@ -6,7 +6,7 @@
 ## Comenzando 🚀
 
 
-_Esta API rest permite realizar un catalogo de peliculas haciendo enfasis en las acciones de creacion, edicion, eliminacion y relacion de generos, peliculas y personajes, que seran guardades en su base de datos._
+_Esta API rest permite realizar un catalogo de peliculas haciendo enfasis en las acciones de creacion, edicion, eliminacion y relacion de generos, peliculas y personajes, que seran guardados en su base de datos._
 
 ### Construccion 🔧
 
