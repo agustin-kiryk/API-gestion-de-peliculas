@@ -45,7 +45,7 @@ _Vea el siguiente ejemplo:_
 ![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/registro11.png?raw=true)
 
 ### Iniciar sesion ✅
-_Una vez registrado, para iniciar secion se debe ingresar el nombre de usuario y contraseña. El sistema brindará un token JWT que tendra un tiempo de expiración, el cual puede ser configurado desde el metodo **createtoken**, ubicado en :_
+_Una vez registrado, para iniciar sesion se debe ingresar el nombre de usuario y contraseña. El sistema brindará un token JWT que tendra un tiempo de expiración, el cual puede ser configurado desde el metodo **createtoken**, ubicado en :_
 ```
 auth/Service/JwtUtils.java
 ```
@@ -53,7 +53,7 @@ _Ejemplo_
 
 ![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/login1.png?raw=true)
 
-### End points para realizar las operaciones de creacion / edicion / eliminacion de entidades 📝
+### Endpoints para realizar las operaciones de creacion / edicion / eliminacion de entidades 📝
 
 _Ejemplo de creacion de Genero_
 
