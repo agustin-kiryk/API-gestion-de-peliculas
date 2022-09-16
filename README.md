@@ -6,12 +6,12 @@
 ## Comenzando 🚀
 
 
-_Esta API rest permite realizar las acciones de creacion, edicion y eliminacion de generos, peliculas y personajes de disney, cumpliendo con las consiganas preestablecidas._
+_Esta API rest permite realizar un catalogo de peliculas haciendo enfasis en las acciones de creacion, edicion, eliminacion y relacion de generos, peliculas y personajes, que seran guardades en su base de datos._
 
 ### Construccion 🔧
 
 _El modelado de la base de datos con sus respectivas relaciones se realiza automaticamente con JPA e Hibernate al levantar la aplicacion.
-Dentro del proyecto en la carpeta resources/application.properties se debe poner su url con la ubicacion de su base de datos, usuario y contraseña, como el siguiente ejemplo._
+Dentro del proyecto en la carpeta **resources/application.properties** se debe poner su url con la ubicacion de su base de datos, usuario y contraseña, como el siguiente ejemplo._
 ```
 - spring.datasource.url=jdbc:mysql://localhost:3306/NOMBREBDD
 ```
@@ -24,84 +24,69 @@ Dentro del proyecto en la carpeta resources/application.properties se debe poner
 
 _En este caso se usó Mysql, local host y el puerto 3036_
 
-## Configuracion de envio de Email en el registro ⚙️
+### Configuracion de envio de Email en el registro 📧
 
-_Para ingresar al sistema debe registrar un nombre de usuario y una contraseña, el sistema envia un mail de bienvenida el cual se configura desde resources/application.properties segun el siguiente ejemplo_ 
+_Para ingresar al sistema debe registrar un nombre de usuario y una contraseña, el sistema envia un mail de bienvenida el cual se configura desde **resources/application.properties** segun el siguiente ejemplo_ 
 ```
 alkemy.disney.email.sender= ejemplo@gmail.com  (Nombre del remitente del mail)
 ```
-_Puede tambiane configurar el contenido del mail en :_
+_Puede tambien configurar el contenido del mail en :_
 ```
 /service/impl/EmailServiceImpl.java
 ```
-_Se recomienda registrarce en https://signup.sendgrid.com/ para crear un usuario y obtener una API_KEY que será configurada en environment variables dentro de la aplicacion_
+_Se recomienda registrarce en https://signup.sendgrid.com/ para crear un usuario y obtener una API_KEY que será configurada en **environment variables** dentro de la aplicacion_
 
-### Registro 🔩
+### Registro 📁
 
-_Explica que verifican estas pruebas y por qué_
+_Ingresar un nombre de usuario y contraseña para que sea guardado en su base de datos, esta ultima será encriptada por seguridad_
 
+_Vea el siguiente ejemplo:_
+
+![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/registro11.png?raw=true)
+
+### Iniciar secion ✅
+_Una vez registrado, para iniciar secion se debe ingresar el nombre de usuario y contraseña. El sistema brindará un token JWT que tendra un tiempo de expiración, el cual puede ser configurado desde el metodo **createtoken**, ubicado en :_
 ```
-Da un ejemplo
+auth/Service/JwtUtils.java
 ```
+_Ejemplo_
 
-### Y las pruebas de estilo de codificación ⌨️
+![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/login1.png?raw=true)
 
-_Explica que verifican estas pruebas y por qué_
+### End points para realizar las operaciones de creacion / edicion / eliminacion de entidades 📝
 
-```
-Da un ejemplo
-```
+_Ejemplo de creacion de Genero_
 
-## Despliegue 📦
+![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/generos1.png?raw=true)
 
-_Agrega notas adicionales sobre como hacer deploy_
+
+### Puede ver la documentacion de todos los Endpoints e interactuar en el siguiente link👇  https://documenter.getpostman.com/view/22927578/2s7YfLhvX6#eef4c69c-c7f3-4295-8084-434eda85f89f
+
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+_Para realizar este pryecto se usaron las siguientes herramientas_
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* 👉 ide : IJ idea
+* 👉 lenguaje : JAVA
+* 👉 [Maven](https://maven.apache.org/) - Manejador de dependencias
+* 👉 Spring Boot
+* 👉 JPA
+* 👉 Hibernate
+* 👉 ORM : Dbiever
+* 👉 Mysql
+* 👉 SendGrid
+* 👉 JWT Token
+* 👉 Postman
 
-## Contribuyendo 🖇️
 
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
+## Autor ✒️
 
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
-
-## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
+* **Kiryk Agustin**
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
-
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* Dona con cripto a esta dirección: `0xf253fc233333078436d111175e5a76a649890000`
-* etc.
-
-
-
----
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
-
+🎁 Este proyecto no está bajo la Licencia para que pueda ayudar a las personas que se estan iniciando 🎁
 
 
 
