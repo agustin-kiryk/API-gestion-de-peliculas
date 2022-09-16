@@ -51,7 +51,7 @@ auth/Service/JwtUtils.java
 ```
 _Ejemplo_
 
-![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/login1.png?raw=true)
+![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/sesion.png?raw=true)
 
 ### Endpoints para realizar las operaciones de creacion / edicion / eliminacion de entidades 📝
 
