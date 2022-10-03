@@ -6,7 +6,7 @@
 ## Comenzando 🚀
 
 
-_Esta API rest permite realizar un catalogo de peliculas haciendo enfasis en las acciones de creacion, edicion, eliminacion y relacion de generos, peliculas y personajes, que seran guardades en su base de datos._
+_Esta API rest permite realizar un catalogo de peliculas haciendo enfasis en las acciones de creacion, edicion, eliminacion y relacion de generos, peliculas y personajes, que seran guardados en su base de datos._
 
 ### Construccion 🔧
 
@@ -44,16 +44,16 @@ _Vea el siguiente ejemplo:_
 
 ![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/registro11.png?raw=true)
 
-### Iniciar secion ✅
-_Una vez registrado, para iniciar secion se debe ingresar el nombre de usuario y contraseña. El sistema brindará un token JWT que tendra un tiempo de expiración, el cual puede ser configurado desde el metodo **createtoken**, ubicado en :_
+### Iniciar sesion ✅
+_Una vez registrado, para iniciar sesion se debe ingresar el nombre de usuario y contraseña. El sistema brindará un token JWT que tendra un tiempo de expiración, el cual puede ser configurado desde el metodo **createtoken**, ubicado en :_
 ```
 auth/Service/JwtUtils.java
 ```
 _Ejemplo_
 
-![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/login1.png?raw=true)
+![](https://github.com/agustin-kiryk/Pre-aceleracion-Agustin-Kiryk/blob/main/src/main/resources/static/sesion.png?raw=true)
 
-### End points para realizar las operaciones de creacion / edicion / eliminacion de entidades 📝
+### Endpoints para realizar las operaciones de creacion / edicion / eliminacion de entidades 📝
 
 _Ejemplo de creacion de Genero_
 
